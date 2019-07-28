@@ -1,0 +1,20 @@
+package com.dubbo.nacos.provider;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * provider application
+ * @author 王鑫
+ * @date 2019-07-28 10:32
+ */
+@Slf4j
+@SpringBootApplication
+public class ProviderApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ProviderApplication.class, args);
+    }
+
+}
