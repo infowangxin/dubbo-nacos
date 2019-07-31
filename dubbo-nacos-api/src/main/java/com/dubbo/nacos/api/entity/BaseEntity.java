@@ -3,13 +3,10 @@ package com.dubbo.nacos.api.entity;
 import java.io.Serializable;
 
 /**
- * @author 王鑫
- * @date 2019-07-28 10:43
+ * base entity
+ * @author 胡桃夹子
+ * @date 2019-07-31 19:57
  */
-public interface BaseEntity<Pk extends Serializable> extends Serializable {
-
-    public void setId(Pk id);
-
-    public Pk getId();
+public abstract class BaseEntity implements Serializable {
 
 }
