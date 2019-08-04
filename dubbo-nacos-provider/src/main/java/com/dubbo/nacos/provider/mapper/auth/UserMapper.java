@@ -1,6 +1,8 @@
 package com.dubbo.nacos.provider.mapper.auth;
 
 import com.dubbo.nacos.api.entity.auth.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * User mapper
@@ -8,6 +10,7 @@ import com.dubbo.nacos.api.entity.auth.User;
  * @author 胡桃夹子
  * @date 2019-08-01 00:12
  */
+@Mapper
 public interface UserMapper {
 
     /**
@@ -31,4 +34,11 @@ public interface UserMapper {
      */
     int updateByPrimaryKeySelective(User user);
 
+    /**
+     * find User by account
+     *
+     * @param account User.account
+     * @return User
+     */
+    User findUserByAccount(@Param("account") String account);
 }

@@ -3,12 +3,12 @@
 <mapper namespace="com.dubbo.nacos.provider.mapper.auth.RoleMapper">
 
   <resultMap id="BaseResultMap" type="com.dubbo.nacos.api.entity.auth.Role">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
-    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
-    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
-    <result column="role_type" jdbcType="VARCHAR" property="roleType" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode"/>
+    <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+    <result column="role_type" jdbcType="VARCHAR" property="roleType"/>
+    <result column="remark" jdbcType="VARCHAR" property="remark"/>
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -17,7 +17,7 @@
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
     from role
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -87,5 +87,12 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="findRoleByRoleCode" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List"/>
+    from role
+    where role_code = #{roleCode,jdbcType=BIGINT}
+  </select>
 
 </mapper>

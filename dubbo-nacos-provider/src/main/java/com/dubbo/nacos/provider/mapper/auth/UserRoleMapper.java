@@ -1,6 +1,7 @@
 package com.dubbo.nacos.provider.mapper.auth;
 
 import com.dubbo.nacos.api.entity.auth.UserRole;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * UserRole mapper
@@ -8,6 +9,7 @@ import com.dubbo.nacos.api.entity.auth.UserRole;
  * @author 胡桃夹子
  * @date 2019-08-01 00:13
  */
+@Mapper
 public interface UserRoleMapper {
 
     /**

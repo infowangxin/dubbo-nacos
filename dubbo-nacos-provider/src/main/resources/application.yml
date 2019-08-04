@@ -2,6 +2,8 @@ server:
   port: 8888
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: dubbo-nacos-provider
   datasource:
@@ -28,3 +30,16 @@ spring:
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       use-global-data-source-stat: true
 
+dubbo:
+  application:
+    name: dubbo-nacos-provider
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address:
+      nacos://127.0.0.1:8848
+
+
+mybatis-plus:
+  mapper-locations: classpath:mybatis/mapper/**/*.xml

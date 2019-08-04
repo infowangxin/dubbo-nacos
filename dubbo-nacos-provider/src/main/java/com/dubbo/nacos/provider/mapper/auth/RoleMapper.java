@@ -1,6 +1,8 @@
 package com.dubbo.nacos.provider.mapper.auth;
 
 import com.dubbo.nacos.api.entity.auth.Role;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * Role mapper
@@ -8,7 +10,9 @@ import com.dubbo.nacos.api.entity.auth.Role;
  * @author 胡桃夹子
  * @date 2019-08-01 00:10
  */
+@Mapper
 public interface RoleMapper {
+
     /**
      * insert role
      *
@@ -30,4 +34,11 @@ public interface RoleMapper {
      */
     int updateByPrimaryKeySelective(Role role);
 
+    /**
+     * find Role by roleCode
+     *
+     * @param roleCode Role.roleCode
+     * @return Role
+     */
+    Role findRoleByRoleCode(@Param("roleCode") String roleCode);
 }

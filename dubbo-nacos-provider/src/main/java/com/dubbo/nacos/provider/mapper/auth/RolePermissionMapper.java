@@ -1,6 +1,7 @@
 package com.dubbo.nacos.provider.mapper.auth;
 
 import com.dubbo.nacos.api.entity.auth.RolePermission;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * RolePermission mapper
@@ -8,6 +9,7 @@ import com.dubbo.nacos.api.entity.auth.RolePermission;
  * @author 胡桃夹子
  * @date 2019-08-01 00:11
  */
+@Mapper
 public interface RolePermissionMapper {
     /**
      * insert RolePermission

@@ -57,7 +57,7 @@ public class Permission extends BaseEntity {
     /**
      * site code
      **/
-    private String siteType;
+    private String siteCode;
 
     /**
      * remark
@@ -68,7 +68,7 @@ public class Permission extends BaseEntity {
         super();
     }
 
-    public Permission(Long id, String name, String code, String url, Integer lev, Integer sort, String parentId, String siteType, String remark) {
+    public Permission(Long id, String name, String code, String url, Integer lev, Integer sort, String parentId, String siteCode, String remark) {
         this.id = id;
         this.name = name;
         this.code = code;
@@ -76,7 +76,7 @@ public class Permission extends BaseEntity {
         this.lev = lev;
         this.sort = sort;
         this.parentId = parentId;
-        this.siteType = siteType;
+        this.siteCode = siteCode;
         this.remark = remark;
     }
 }

@@ -1,6 +1,7 @@
 package com.dubbo.nacos.provider.mapper.auth;
 
 import com.dubbo.nacos.api.entity.auth.Permission;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * Permission mapper
@@ -8,6 +9,7 @@ import com.dubbo.nacos.api.entity.auth.Permission;
  * @author 胡桃夹子
  * @date 2019-08-01 00:09
  */
+@Mapper
 public interface PermissionMapper {
 
     /**

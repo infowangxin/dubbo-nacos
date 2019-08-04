@@ -10,12 +10,12 @@
     <result column="lev" jdbcType="INTEGER" property="lev"/>
     <result column="sort" jdbcType="INTEGER" property="sort"/>
     <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
-    <result column="site_type" jdbcType="VARCHAR" property="siteType"/>
+    <result column="site_code" jdbcType="VARCHAR" property="siteCode"/>
     <result column="remark" jdbcType="VARCHAR" property="remark"/>
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, name, code, url, lev, sort, parent_id, site_type, remark
+    id, name, code, url, lev, sort, parent_id, site_code, remark
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -49,8 +49,8 @@
       <if test="parentId != null">
         parent_id,
       </if>
-      <if test="siteType != null">
-        site_type,
+      <if test="siteCode != null">
+        site_code,
       </if>
       <if test="remark != null">
         remark,
@@ -78,8 +78,8 @@
       <if test="parentId != null">
         #{parentId,jdbcType=BIGINT},
       </if>
-      <if test="siteType != null">
-        #{siteType,jdbcType=VARCHAR},
+      <if test="siteCode != null">
+        #{siteCode,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -108,8 +108,8 @@
       <if test="parentId != null">
         parent_id = #{parentId,jdbcType=BIGINT},
       </if>
-      <if test="siteType != null">
-        site_type = #{siteType,jdbcType=VARCHAR},
+      <if test="siteCode != null">
+        site_code = #{siteCode,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
