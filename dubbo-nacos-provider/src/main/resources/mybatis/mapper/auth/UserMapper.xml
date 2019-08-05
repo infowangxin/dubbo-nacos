@@ -3,13 +3,13 @@
 <mapper namespace="com.dubbo.nacos.provider.mapper.auth.UserMapper">
 
   <resultMap id="BaseResultMap" type="com.dubbo.nacos.api.entity.auth.User">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="account" jdbcType="VARCHAR" property="account" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="real_name" jdbcType="VARCHAR" property="realName" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="mobile" jdbcType="INTEGER" property="mobile" />
-    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="account" jdbcType="VARCHAR" property="account"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+    <result column="email" jdbcType="VARCHAR" property="email"/>
+    <result column="mobile" jdbcType="INTEGER" property="mobile"/>
+    <result column="salt" jdbcType="VARCHAR" property="salt"/>
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -18,7 +18,7 @@
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from user
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -98,9 +98,9 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="findUserByAccount" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="findUserByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from user
     where account = #{account,jdbcType=VARCHAR}
   </select>

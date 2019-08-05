@@ -1,6 +1,6 @@
 package com.dubbo.nacos.provider.framework.id.impl;
 
-import com.dubbo.nacos.api.enums.TableEnum;
+import com.dubbo.nacos.api.enums.DnTableEnum;
 import com.dubbo.nacos.common.utils.LocalUtil;
 import com.dubbo.nacos.provider.framework.id.IdGenerator;
 import com.dubbo.nacos.provider.framework.id.LocalIdGenerator;
@@ -23,20 +23,22 @@ public class IdGeneratorImpl implements IdGenerator {
     @Autowired
     private LocalIdGenerator localIdGenerator;
 
+    private final static long max = -1L ^ (-1L << 5L);
+
     @Value("${spring.application.name}")
     private String name;
 
     @Override
-    public Long nextUniqueId(TableEnum tableEnum) {
+    public Long nextUniqueId(DnTableEnum DNTableEnum) {
         String mac = LocalUtil.getMacAddress();
         Long machineId = null;
         if (StringUtils.isNotBlank(mac)) {
-            machineId = Math.abs(Long.valueOf(mac.hashCode()) % 3);
+            machineId = Math.abs(Long.valueOf(mac.hashCode()) % max);
         }
-        Long dataCenterId = Math.abs(Long.valueOf(name.hashCode()) % 2);
+        Long dataCenterId = Math.abs(Long.valueOf(name.hashCode()) % max);
         log.info("# dataCenterId={},machineId={},name={},mac={}", dataCenterId, machineId, name, mac);
         Long id = localIdGenerator.nextUniqueId(dataCenterId, machineId);
-        log.info("# table={},id={}", tableEnum, id);
+        log.info("# table={},id={}", DNTableEnum, id);
         return id;
     }
 }

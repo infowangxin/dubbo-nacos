@@ -11,36 +11,36 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class BusinessException extends RuntimeException {
+public class DnBusinessException extends RuntimeException {
 
     private Integer errorCode = -1;
     private String errorMsg;
     private Throwable cause;
 
-    public BusinessException(Integer errorCode, String errorMsg, Exception cause) {
+    public DnBusinessException(Integer errorCode, String errorMsg, Exception cause) {
         super(cause);
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
         this.cause = cause;
     }
 
-    public BusinessException(Integer errorCode, String errorMsg) {
+    public DnBusinessException(Integer errorCode, String errorMsg) {
         super(errorMsg);
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
     }
 
-    public BusinessException(String errorMsg, Throwable cause) {
+    public DnBusinessException(String errorMsg, Throwable cause) {
         super(errorMsg, cause);
         this.errorMsg = errorMsg;
     }
 
-    public BusinessException(String errorMsg) {
+    public DnBusinessException(String errorMsg) {
         super(errorMsg);
         this.errorMsg = errorMsg;
     }
 
-    public BusinessException(Throwable cause) {
+    public DnBusinessException(Throwable cause) {
         super(cause);
     }
 

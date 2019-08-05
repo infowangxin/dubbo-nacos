@@ -88,11 +88,11 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="findRoleByRoleCode" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="findRoleByRoleCode" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
         <include refid="Base_Column_List"/>
     from role
-    where role_code = #{roleCode,jdbcType=BIGINT}
+    where role_code = #{roleCode,jdbcType=VARCHAR} limit 1
   </select>
 
 </mapper>

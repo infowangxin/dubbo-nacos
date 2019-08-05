@@ -1,6 +1,6 @@
 package com.dubbo.nacos.provider.framework.id;
 
-import com.dubbo.nacos.api.enums.TableEnum;
+import com.dubbo.nacos.api.enums.DnTableEnum;
 
 /**
  * get unique id
@@ -12,9 +12,9 @@ public interface IdGenerator {
     /**
      * get unique id
      *
-     * @param tableEnum TableEnum
+     * @param DNTableEnum TableEnum
      * @return 全局唯一ID
      */
-    Long nextUniqueId(TableEnum tableEnum);
+    Long nextUniqueId(DnTableEnum DNTableEnum);
 
 }

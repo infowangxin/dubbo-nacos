@@ -2,15 +2,15 @@ package com.dubbo.nacos.api.service.auth;
 
 import com.dubbo.nacos.api.entity.auth.Role;
 import com.dubbo.nacos.api.entity.auth.User;
-import com.dubbo.nacos.api.exception.BusinessException;
+import com.dubbo.nacos.api.exception.DnBusinessException;
 
 /**
- * authenticate related interface
+ * dubbo nacos authenticate related interface
  *
  * @author 王鑫
  * @date 2019-07-28 10:47
  */
-public interface AuthSerice {
+public interface DnAuthSerice {
 
     /**
      * find Role by roleCode
@@ -43,7 +43,7 @@ public interface AuthSerice {
      * @param roleId Role.id
      * @return
      */
-    public boolean authorization(String userId, String roleId);
+    public boolean authorization(Long userId, Long roleId);
 
     /**
      * user login
@@ -52,6 +52,6 @@ public interface AuthSerice {
      * @param password User.password
      * @return User
      */
-    public User login(String account, String password) throws BusinessException;
+    public User login(String account, String password) throws DnBusinessException;
 
 }

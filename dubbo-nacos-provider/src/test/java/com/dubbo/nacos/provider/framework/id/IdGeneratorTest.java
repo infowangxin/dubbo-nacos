@@ -1,6 +1,6 @@
 package com.dubbo.nacos.provider.framework.id;
 
-import com.dubbo.nacos.api.enums.TableEnum;
+import com.dubbo.nacos.api.enums.DnTableEnum;
 import com.dubbo.nacos.provider.ProviderApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -26,7 +26,7 @@ public class IdGeneratorTest {
     @Test
     public void nextUniqueId() {
         try {
-            Long id = idGenerator.nextUniqueId(TableEnum.user);
+            Long id = idGenerator.nextUniqueId(DnTableEnum.user);
             log.info("# id={}", id);
         } catch (Exception e) {
             e.printStackTrace();
