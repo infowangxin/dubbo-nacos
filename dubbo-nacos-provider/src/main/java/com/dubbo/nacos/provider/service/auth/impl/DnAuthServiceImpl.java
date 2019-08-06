@@ -1,12 +1,15 @@
 package com.dubbo.nacos.provider.service.auth.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.dubbo.nacos.api.constants.DnConstans;
 import com.dubbo.nacos.api.entity.auth.Role;
 import com.dubbo.nacos.api.entity.auth.User;
 import com.dubbo.nacos.api.entity.auth.UserRole;
 import com.dubbo.nacos.api.enums.DnTableEnum;
 import com.dubbo.nacos.api.exception.DnBusinessException;
 import com.dubbo.nacos.api.service.auth.DnAuthSerice;
+import com.dubbo.nacos.common.utils.salt.Digests;
+import com.dubbo.nacos.common.utils.salt.Encodes;
 import com.dubbo.nacos.provider.framework.id.IdGenerator;
 import com.dubbo.nacos.provider.mapper.auth.RoleMapper;
 import com.dubbo.nacos.provider.mapper.auth.UserMapper;
@@ -58,6 +61,29 @@ public class DnAuthServiceImpl implements DnAuthSerice {
         return user;
     }
 
+    /**
+     * get salt
+     *
+     * @return User.salt
+     */
+    private String getSalt() {
+        byte[] salt = Digests.generateSalt(DnConstans.SALT_SIZE);
+        return Encodes.encodeHex(salt);
+    }
+
+    /**
+     * get ciphertext
+     *
+     * @param password login password
+     * @param salt     User.salt
+     * @return ciphertext string
+     */
+    private String getCiphertext(String password, String salt) {
+        byte[] bytes = Encodes.decodeHex(salt);
+        byte[] hashPassword = Digests.sha1(password.getBytes(), bytes, DnConstans.HASH_INTERATIONS);
+        return Encodes.encodeHex(hashPassword);
+    }
+
     @Override
     public boolean addUser(User user) {
         if (null == user) {
@@ -70,9 +96,18 @@ public class DnAuthServiceImpl implements DnAuthSerice {
             return false;
         }
 
-        //user.setId();
-
-        return false;
+        String salt = getSalt();
+        String ciphertext = getCiphertext(user.getPassword(), salt);
+        user.setSalt(salt);
+        user.setPassword(ciphertext);
+        user.setId(idGenerator.nextUniqueId(DnTableEnum.user));
+        int ret = userMapper.insert(user);
+        log.info("# addUser ret={}", ret);
+        if (ret == 0) {
+            log.info("# addUser error , user={}", user);
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -115,11 +150,15 @@ public class DnAuthServiceImpl implements DnAuthSerice {
         }
         User user = findUserByAccount(account);
         if (null == user) {
-            log.error("# login error");
+            log.error("# login error , don't find user");
             return null;
         }
 
-
+        String ciphertext = getCiphertext(password, user.getSalt());
+        if (!StringUtils.equals(user.getPassword(), ciphertext)) {
+            log.error("# login error , password error");
+            return null;
+        }
         return user;
     }
 }
