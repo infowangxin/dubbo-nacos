@@ -36,7 +36,7 @@ public class IdGeneratorImpl implements IdGenerator {
             machineId = Math.abs(Long.valueOf(mac.hashCode()) % max);
         }
         Long dataCenterId = Math.abs(Long.valueOf(name.hashCode()) % max);
-        log.info("# dataCenterId={},machineId={},name={},mac={}", dataCenterId, machineId, name, mac);
+        //log.info("# dataCenterId={},machineId={},name={},mac={}", dataCenterId, machineId, name, mac);
         Long id = localIdGenerator.nextUniqueId(dataCenterId, machineId);
         log.info("# table={},id={}", DNTableEnum, id);
         return id;

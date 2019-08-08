@@ -7,7 +7,7 @@ import com.dubbo.nacos.api.exception.DnBusinessException;
 /**
  * dubbo nacos authenticate related interface
  *
- * @author 王鑫
+ * @author 胡桃夹子
  * @date 2019-07-28 10:47
  */
 public interface DnAuthSerice {
@@ -43,7 +43,7 @@ public interface DnAuthSerice {
      * @param roleId Role.id
      * @return
      */
-    public boolean authorization(Long userId, Long roleId);
+    public boolean authorizing(Long userId, Long roleId);
 
     /**
      * user login

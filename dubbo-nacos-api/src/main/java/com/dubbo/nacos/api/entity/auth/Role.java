@@ -2,9 +2,7 @@ package com.dubbo.nacos.api.entity.auth;
 
 
 import com.dubbo.nacos.api.entity.BaseEntity;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 /**
  * Role
@@ -12,9 +10,7 @@ import lombok.ToString;
  * @author 胡桃夹子
  * @date 2019-07-31 20:03
  */
-@Setter
-@Getter
-@ToString
+@Data
 public class Role extends BaseEntity {
 
     private static final long serialVersionUID = -6982490361440305761L;

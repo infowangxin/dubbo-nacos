@@ -2,6 +2,7 @@ package com.dubbo.nacos.api.entity.auth;
 
 
 import com.dubbo.nacos.api.entity.BaseEntity;
+import lombok.Data;
 
 /**
  * User and Role relation
@@ -9,6 +10,7 @@ import com.dubbo.nacos.api.entity.BaseEntity;
  * @author 胡桃夹子
  * @date 2019-07-31 19:53
  */
+@Data
 public class UserRole extends BaseEntity {
 
     private static final long serialVersionUID = -56720255622342923L;

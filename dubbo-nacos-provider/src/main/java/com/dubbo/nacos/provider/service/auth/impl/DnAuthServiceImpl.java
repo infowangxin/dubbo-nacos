@@ -101,6 +101,7 @@ public class DnAuthServiceImpl implements DnAuthSerice {
         user.setSalt(salt);
         user.setPassword(ciphertext);
         user.setId(idGenerator.nextUniqueId(DnTableEnum.user));
+        log.info("# user={}", user);
         int ret = userMapper.insert(user);
         log.info("# addUser ret={}", ret);
         if (ret == 0) {
@@ -111,31 +112,31 @@ public class DnAuthServiceImpl implements DnAuthSerice {
     }
 
     @Override
-    public boolean authorization(Long userId, Long roleId) {
-        log.info("# authorization userId={},roleId={}", userId, roleId);
+    public boolean authorizing(Long userId, Long roleId) {
+        log.info("# authorizing userId={},roleId={}", userId, roleId);
         if (null == userId || null == roleId) {
-            log.error("# authorization false , userId or roleId is empty");
+            log.error("# authorizing false , userId or roleId is empty");
             return false;
         }
         User user = userMapper.selectByPrimaryKey(userId);
         if (null == user) {
-            log.error("# authorization false , don't find user , userId={}", userId);
+            log.error("# authorizing false , don't find user , userId={}", userId);
             return false;
         }
         Role role = roleMapper.selectByPrimaryKey(roleId);
         if (null == role) {
-            log.error("# authorization false , don't find role , roleId={}", roleId);
+            log.error("# authorizing false , don't find role , roleId={}", roleId);
             return false;
         }
         UserRole userRole = userRoleMapper.selectUserRole(userId, roleId);
         if (null != userRole) {
-            log.info("# the previous authorization was successful");
+            log.info("# the previous authorizing was successful");
             return true;
         } else {
             userRole = new UserRole(idGenerator.nextUniqueId(DnTableEnum.user_role), userId, roleId);
             int ret = userRoleMapper.insert(userRole);
             if (1 == ret) {
-                log.info("# authorization successful");
+                log.info("# authorizing successful");
                 return true;
             }
             return false;

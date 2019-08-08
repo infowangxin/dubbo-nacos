@@ -62,13 +62,13 @@ public class AuthServiceTest {
     }
 
     @Test
-    public void authorization() {
+    public void authorizing() {
         try {
             String roleCode = DnConstans.ROLE_FOR_ADMIN;
             String account = "vincent";
             Role role = dnAuthSerice.findRoleByRoleCode(roleCode);
             User user = dnAuthSerice.findUserByAccount(account);
-            boolean ret = dnAuthSerice.authorization(user.getId(), role.getId());
+            boolean ret = dnAuthSerice.authorizing(user.getId(), role.getId());
             log.info("# ret={}", ret);
         } catch (Exception e) {
             e.printStackTrace();

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * provider application
- * @author 王鑫
+ * @author 胡桃夹子
  * @date 2019-07-28 10:32
  */
 @Slf4j
