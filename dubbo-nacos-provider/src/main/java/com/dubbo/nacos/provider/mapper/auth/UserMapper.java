@@ -1,6 +1,6 @@
 package com.dubbo.nacos.provider.mapper.auth;
 
-import com.dubbo.nacos.api.entity.auth.User;
+import com.dubbo.nacos.api.entity.auth.DnUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,23 +16,23 @@ public interface UserMapper {
     /**
      * insert  User
      *
-     * @param user
+     * @param dnUser
      */
-    int insert(User user);
+    int insert(DnUser dnUser);
 
     /**
      * select User by id
      *
      * @param id
      */
-    User selectByPrimaryKey(Long id);
+    DnUser selectByPrimaryKey(Long id);
 
     /**
      * update User by  selective
      *
-     * @param user
+     * @param dnUser
      */
-    int updateByPrimaryKeySelective(User user);
+    int updateByPrimaryKeySelective(DnUser dnUser);
 
     /**
      * find User by account
@@ -40,5 +40,5 @@ public interface UserMapper {
      * @param account User.account
      * @return User
      */
-    User findUserByAccount(@Param("account") String account);
+    DnUser findUserByAccount(@Param("account") String account);
 }

@@ -180,7 +180,7 @@
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <a href="javascript:;" class="dnUser-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="images/img.jpg" alt="">John Doe
                     <span class=" fa fa-angle-down"></span>
                   </a>
@@ -197,12 +197,12 @@
                   </ul>
                 </li>
 
-                <li role="presentation" class="dropdown">
+                <li dnRole="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
                     <span class="badge bg-green">6</span>
                   </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" dnRole="menu">
                     <li>
                       <a>
                         <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
@@ -268,7 +268,7 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="right_col" dnRole="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
@@ -298,8 +298,8 @@
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" dnRole="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" dnRole="menu">
                           <li><a href="#">Settings 1</a>
                           </li>
                           <li><a href="#">Settings 2</a>
@@ -322,15 +322,15 @@
                       <h3>Samuel Doe</h3>
 
                       <ul class="list-unstyled user_data">
-                        <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA
+                        <li><i class="fa fa-map-marker dnUser-profile-icon"></i> San Francisco, California, USA
                         </li>
 
                         <li>
-                          <i class="fa fa-briefcase user-profile-icon"></i> Software Engineer
+                          <i class="fa fa-briefcase dnUser-profile-icon"></i> Software Engineer
                         </li>
 
                         <li class="m-top-xs">
-                          <i class="fa fa-external-link user-profile-icon"></i>
+                          <i class="fa fa-external-link dnUser-profile-icon"></i>
                           <a href="http://www.kimlabs.com/profile/" target="_blank">www.kimlabs.com</a>
                         </li>
                       </ul>
@@ -344,25 +344,25 @@
                         <li>
                           <p>Web Applications</p>
                           <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                            <div class="progress-bar bg-green" dnRole="progressbar" data-transitiongoal="50"></div>
                           </div>
                         </li>
                         <li>
                           <p>Website Design</p>
                           <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
+                            <div class="progress-bar bg-green" dnRole="progressbar" data-transitiongoal="70"></div>
                           </div>
                         </li>
                         <li>
                           <p>Automation & Testing</p>
                           <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
+                            <div class="progress-bar bg-green" dnRole="progressbar" data-transitiongoal="30"></div>
                           </div>
                         </li>
                         <li>
                           <p>UI / UX</p>
                           <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                            <div class="progress-bar bg-green" dnRole="progressbar" data-transitiongoal="50"></div>
                           </div>
                         </li>
                       </ul>
@@ -382,21 +382,21 @@
                           </div>
                         </div>
                       </div>
-                      <!-- start of user-activity-graph -->
+                      <!-- start of dnUser-activity-graph -->
                       <div id="graph_bar" style="width:100%; height:280px;"></div>
-                      <!-- end of user-activity-graph -->
+                      <!-- end of dnUser-activity-graph -->
 
-                      <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Recent Activity</a>
+                      <div class="" dnRole="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" dnRole="tablist">
+                          <li dnRole="presentation" class="active"><a href="#tab_content1" id="home-tab" dnRole="tab" data-toggle="tab" aria-expanded="true">Recent Activity</a>
                           </li>
-                          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Projects Worked on</a>
+                          <li dnRole="presentation" class=""><a href="#tab_content2" dnRole="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Projects Worked on</a>
                           </li>
-                          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
+                          <li dnRole="presentation" class=""><a href="#tab_content3" dnRole="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
                           </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
-                          <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                          <div dnRole="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
 
                             <!-- start recent activity -->
                             <ul class="messages">
@@ -469,9 +469,9 @@
                             <!-- end recent activity -->
 
                           </div>
-                          <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                          <div dnRole="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 
-                            <!-- start user projects -->
+                            <!-- start dnUser projects -->
                             <table class="data table table-striped no-margin">
                               <thead>
                                 <tr>
@@ -529,10 +529,10 @@
                                 </tr>
                               </tbody>
                             </table>
-                            <!-- end user projects -->
+                            <!-- end dnUser projects -->
 
                           </div>
-                          <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                          <div dnRole="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
                             <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
                               photo booth letterpress, commodo enim craft beer mlkshk </p>
                           </div>

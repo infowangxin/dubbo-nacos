@@ -30,7 +30,7 @@ The standard jquery.autocomplete.js file is around 13KB when minified.
 * `onSearchComplete`: `function (query, suggestions) {}` called after ajax response is processed. `this` is bound to input element. `suggestions` is an array containing the results.
 * `onSearchError`: `function (query, jqXHR, textStatus, errorThrown) {}` called if ajax request fails. `this` is bound to input element.
 * `transformResult`: `function(response, originalQuery) {}` called after the result of the query is ready. Converts the result into response.suggestions format.
-* `onSelect`: `function (suggestion) {}` Callback function invoked when user selects suggestion
+* `onSelect`: `function (suggestion) {}` Callback function invoked when dnUser selects suggestion
   from the list. `this` inside callback refers to input HtmlElement.
 * `minChars`: Minimum number of characters required to trigger autosuggest. Default: `1`.
 * `lookupLimit`: Number of maximum results to display for local lookup. Default: no limit.
@@ -59,7 +59,7 @@ The standard jquery.autocomplete.js file is around 13KB when minified.
 * `showNoSuggestionNotice`: Default `false`. When no matching results, display a notification label.
 * `noSuggestionNotice`: Default `No results`. Text or htmlString or Element or jQuery object for no matching results label.
 * `onInvalidateSelection`: `function () {}` called when input is altered after selection has been made. `this` is bound to input element.
-* `tabDisabled`: Default `false`. Set to true to leave the cursor in the input field after the user tabs to select a suggestion.
+* `tabDisabled`: Default `false`. Set to true to leave the cursor in the input field after the dnUser tabs to select a suggestion.
 
 ## Instance Methods
 
@@ -243,7 +243,7 @@ $('.autocomplete').devbridgeAutocomplete({ ... });
 Ajax Autocomplete for jQuery is freely distributable under the
 terms of an MIT-style [license](https://github.com/devbridge/jQuery-Autocomplete/blob/master/dist/license.txt).
 
-Copyright notice and permission notice shall be included in all
+Copyright notice and dnPermission notice shall be included in all
 copies or substantial portions of the Software.
 
 ##Authors

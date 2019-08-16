@@ -21,7 +21,7 @@ All notable changes to this project will be documented in this file.
 ### Changes ###
 
 - We now are triggering a second onDrawingDone event on the placeholder object (in addition to the eventholder).
-- Added support for loading stylesheets in cross origin scenarios (this has since been removed as this was deemed a bit of a hack and can still be accomplished by the user of flot through other means).
+- Added support for loading stylesheets in cross origin scenarios (this has since been removed as this was deemed a bit of a hack and can still be accomplished by the dnUser of flot through other means).
 
 ## [3.0.0]
 
@@ -110,7 +110,7 @@ We now render axes and the legend through SVG. Any CSS targeting specific DOM ob
 - The public method `setupGrid` now takes a boolean argument to indicate whether or not to perform an autoScale according to the current setting on the axes.
 
 ### Tick Label visibility options
-- Allows a user to specify whether to show tick labels on all major ticks, at endpoints only, all (major ticks and endpoints), or none at all.
+- Allows a dnUser to specify whether to show tick labels on all major ticks, at endpoints only, all (major ticks and endpoints), or none at all.
 
 ### Axis inversion
 - An axis now be inverted (swap min/max positions) through the `inverted` option on the axes.
@@ -119,7 +119,7 @@ We now render axes and the legend through SVG. Any CSS targeting specific DOM ob
 - Grid lines can now be turned off or on for individual axes.
 
 ### Axis `boxPosition`
-- Allows a user to specify the position an axis is rendered within its box.
+- Allows a dnUser to specify the position an axis is rendered within its box.
 
 ### New `barWidth` options
 
@@ -285,7 +285,7 @@ for creating graph snapshots
 
 ### Bug fixes ###
 
-- plot margins and axis position should be adjusted based on user's grid margin options
+- plot margins and axis position should be adjusted based on dnUser's grid margin options
 
 ## engineering-flot 0.5.4 ##
 
@@ -585,7 +585,7 @@ import the Axis Labels Plugin from http://github.com/markrcote/flot-axislabels
 - improve the performance by:
     - add a flatdata plugin that enables passing data into a faster and memory
     efficient format
-    - allow the use of a user specified decimation method
+    - allow the use of a dnUser specified decimation method
     - reuse internal buffers if possible.
 
 - add an svg layer to Flot
@@ -784,7 +784,7 @@ plugin must be included if axis.mode is set to "time".
 When the axis mode is "time", the axis option "timezone" can be set to null,
 "browser", or a particular timezone (e.g. "America/New_York") to control how
 the dates are displayed. If null, the dates are displayed as UTC. If
-"browser", the dates are displayed in the time zone of the user's browser.
+"browser", the dates are displayed in the time zone of the dnUser's browser.
 
 Date/time formatting has changed and now follows a proper subset of the
 standard strftime specifiers, plus one nonstandard specifier for quarters.
@@ -1283,7 +1283,7 @@ in event handling speed.
    use Flot with libraries like Prototype or Mootools or through raw JSON from
    Ajax responses.
 
- - A new "plotselecting" event is now emitted while the user is making a
+ - A new "plotselecting" event is now emitted while the dnUser is making a
    selection.
 
  - The "plothover" event is now emitted immediately instead of at most 10

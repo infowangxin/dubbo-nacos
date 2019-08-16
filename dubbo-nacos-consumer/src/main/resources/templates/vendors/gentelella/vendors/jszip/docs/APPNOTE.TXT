@@ -41,7 +41,7 @@ to the subject programs and/or the format of the files created or
 accessed by the subject programs and/or the algorithms used by
 the subject programs, or any other matter, is current, correct or
 accurate as delivered.  Any risk of damage due to any possible
-inaccurate information is assumed by the user of the information.
+inaccurate information is assumed by the dnUser of the information.
 Furthermore, the information relating to the subject programs
 and/or the file formats created or accessed by the subject
 programs and/or the algorithms used by the subject programs is
@@ -114,7 +114,7 @@ V. General Format of a .ZIP file
 --------------------------------
 
   Files stored in arbitrary order.  Large .ZIP files can span multiple
-  volumes or be split into user-defined segment sizes. All values
+  volumes or be split into dnUser-defined segment sizes. All values
   are stored in little-endian byte order unless otherwise specified. 
 
   Overall .ZIP file format:
@@ -939,7 +939,7 @@ V. General Format of a .ZIP file
           TSize       2 bytes       Size for the following data block
           Atime       4 bytes       File last access time
           Mtime       4 bytes       File last modification time
-          Uid         2 bytes       File user ID
+          Uid         2 bytes       File dnUser ID
           Gid         2 bytes       File group ID
           (var)       variable      Variable length data field
 
@@ -2491,7 +2491,7 @@ are masked to hide their actual value.
                is used to generate a file session key for encrypting 
                each file.  SHA1 is used to calculate hash data used to 
                derive keys.  File session keys are derived from a master 
-               session key generated from the user-supplied password.
+               session key generated from the dnUser-supplied password.
                If the Flags field in the decryption header contains 
                the value 0x4000, then the ErdData field must be 
                decrypted using 3DES. If the value 0x4000 is not set,
@@ -2862,7 +2862,7 @@ Certificate Processing Differences:
 
 The Certificate Processing Method of encryption differs from the
 Single Password Symmetric Encryption Method as follows.  Instead
-of using a user-defined password to generate a master session key,
+of using a dnUser-defined password to generate a master session key,
 cryptographically random data is used.  The key material is then
 wrapped using standard key-wrapping techniques.  This key material
 is wrapped using the public key of each recipient that will need

@@ -62,7 +62,7 @@ it's probably because the framework you're using is doing something
 weird with the DOM or with the CSS that is interfering with Flot.
 
 A common problem is that there's display:none on a container until the
-user does something. Many tab widgets work this way, and there's
+dnUser does something. Many tab widgets work this way, and there's
 nothing wrong with it - you just can't call Flot inside a display:none
 container as explained in the README so you need to hold off the Flot
 call until the container is actually displayed (or use

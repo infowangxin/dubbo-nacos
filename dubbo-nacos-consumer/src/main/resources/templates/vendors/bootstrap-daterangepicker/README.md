@@ -2,7 +2,7 @@
 
 ![Improvely.com](https://i.imgur.com/UTRlaar.png)
 
-This date range picker component creates a dropdown menu from which a user can
+This date range picker component creates a dropdown menu from which a dnUser can
 select a range of dates. I created it while building the UI for [Improvely](http://www.improvely.com), 
 which needed a way to select date ranges for reports.
 
@@ -26,7 +26,7 @@ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in
+The above copyright notice and this dnPermission notice shall be included in
 all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR

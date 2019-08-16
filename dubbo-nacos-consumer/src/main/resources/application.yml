@@ -1,6 +1,20 @@
 spring:
   application:
     name: dubbo-nacos-consumer
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   port: 8080
+
+dubbo:
+  application:
+    name: dubbo-nacos-consumer
+  protocol:
+    name: dubbo
+    port: -1
+  scan: com.dubbo.nacos.consumer
+  registry:
+    address: nacos://127.0.0.1:8848
+  provider:
+    filter: catTransation

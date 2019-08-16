@@ -115,7 +115,7 @@ may overwrite stuff on a completely different plot.
 ## Some hints on the options ##
    
 Plugins should always support appropriate options to enable/disable
-them because the plugin user may have several plots on the same page
+them because the plugin dnUser may have several plots on the same page
 where only one should use the plugin. In most cases it's probably a
 good idea if the plugin is turned off rather than on per default, just
 like most of the powerful features in Flot.

@@ -7,11 +7,13 @@ spring:
   application:
     name: dubbo-nacos-provider
   datasource:
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf-8&useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+    hikari:
+      connection-init-sql: set names utf8mb4
     druid:
       initial-size: 8
       min-idle: 1
@@ -33,12 +35,15 @@ spring:
 dubbo:
   application:
     name: dubbo-nacos-provider
+  server: true
   protocol:
     name: dubbo
     port: -1
+  scan: com.dubbo.nacos.provider
   registry:
-    address:
-      nacos://127.0.0.1:8848
+    address: nacos://127.0.0.1:8848
+#  provider:
+#    filter: catTransation
 
 
 mybatis-plus:

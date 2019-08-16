@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dubbo.nacos.provider.mapper.auth.UserMapper">
 
-  <resultMap id="BaseResultMap" type="com.dubbo.nacos.api.entity.auth.User">
+  <resultMap id="BaseResultMap" type="com.dubbo.nacos.api.entity.auth.DnUser">
     <id column="id" jdbcType="BIGINT" property="id"/>
     <result column="account" jdbcType="VARCHAR" property="account"/>
     <result column="password" jdbcType="VARCHAR" property="password"/>
@@ -19,12 +19,12 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from user
+    from dn_user
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <insert id="insert" parameterType="com.dubbo.nacos.api.entity.auth.User">
-    insert into user
+  <insert id="insert" parameterType="com.dubbo.nacos.api.entity.auth.DnUser">
+    insert into dn_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -73,8 +73,8 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.dubbo.nacos.api.entity.auth.User">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="com.dubbo.nacos.api.entity.auth.DnUser">
+    update dn_user
     <set>
       <if test="account != null">
         account = #{account,jdbcType=VARCHAR},
@@ -101,7 +101,7 @@
   <select id="findUserByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from user
+    from dn_user
     where account = #{account,jdbcType=VARCHAR}
   </select>
 

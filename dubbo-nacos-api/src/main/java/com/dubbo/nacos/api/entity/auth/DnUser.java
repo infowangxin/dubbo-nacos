@@ -1,7 +1,7 @@
 package com.dubbo.nacos.api.entity.auth;
 
 
-import com.dubbo.nacos.api.entity.BaseEntity;
+import com.dubbo.nacos.api.entity.DnBaseEntity;
 import lombok.Data;
 
 
@@ -12,7 +12,7 @@ import lombok.Data;
  * @date 2019-07-31 20:01
  */
 @Data
-public class User extends BaseEntity {
+public class DnUser extends DnBaseEntity {
 
     private static final long serialVersionUID = -1083711780724721275L;
 
@@ -51,16 +51,16 @@ public class User extends BaseEntity {
      **/
     private String salt;
 
-    public User() {
+    public DnUser() {
         super();
     }
 
-    public User(String account, String password) {
+    public DnUser(String account, String password) {
         this.account = account;
         this.password = password;
     }
 
-    public User(Long id, String account, String password, String realName, String email, String mobile, String salt) {
+    public DnUser(Long id, String account, String password, String realName, String email, String mobile, String salt) {
         this.id = id;
         this.account = account;
         this.password = password;

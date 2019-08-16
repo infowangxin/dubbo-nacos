@@ -46,7 +46,7 @@ If you want to use this for a mobile web site, make sure to read about [how to s
 Optionally, also create a toolbar (see the source of this page for an example):
 
 ```html
-<div class="btn-toolbar" data-role="editor-toolbar"
+<div class="btn-toolbar" data-dnRole="editor-toolbar"
         data-target="#editor">
   ...
 </div> 
@@ -80,7 +80,7 @@ You can assign commands to hotkeys and toolbar links. For a toolbar link, just p
 For more info on execCommand, see the [QuirksMode](http://www.quirksmode.org/dom/execCommand.html) and [Mozilla Developer](https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla) documentation.
 
 ```html
-<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+<div class="btn-toolbar" data-dnRole="editor-toolbar" data-target="#editor">
   <a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>
 </div>
 ```
@@ -185,7 +185,7 @@ use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
 of the Software, and to permit persons to whom the Software is furnished to do
 so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
+The above copyright notice and this dnPermission notice shall be included in all
 copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dubbo.nacos.provider.mapper.auth.PermissionMapper">
 
-  <resultMap id="BaseResultMap" type="com.dubbo.nacos.api.entity.auth.Permission">
+  <resultMap id="BaseResultMap" type="com.dubbo.nacos.api.entity.auth.DnPermission">
     <id column="id" jdbcType="BIGINT" property="id"/>
     <result column="name" jdbcType="VARCHAR" property="name"/>
     <result column="code" jdbcType="VARCHAR" property="code"/>
@@ -21,12 +21,12 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from permission
+    from dn_permission
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <insert id="insert" parameterType="com.dubbo.nacos.api.entity.auth.Permission">
-    insert into permission
+  <insert id="insert" parameterType="com.dubbo.nacos.api.entity.auth.DnPermission">
+    insert into dn_permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -87,8 +87,8 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.dubbo.nacos.api.entity.auth.Permission">
-    update permission
+  <update id="updateByPrimaryKeySelective" parameterType="com.dubbo.nacos.api.entity.auth.DnPermission">
+    update dn_permission
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -117,5 +117,24 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="findPermissionByUserId" resultType="com.dubbo.nacos.api.entity.auth.DnPermission">
+    select
+      p.id,
+      p.`name`,
+      p.fa,
+      p.url,
+      p.lev,
+      p.sort,
+      p.parent_id,
+      p.site_code,
+      p.remark
+    from dn_permission p
+    inner join dn_role_permission rp on p.id=rp.permission_id and p.site_code=rp.site_code
+    inner join dn_user_role ur on ur.role_id=rp.role_id
+    where ur.user_id=#{userId,jdbcType=BIGINT}
+      and rp.site_code=#{siteCode,jdbcType=VARCHAR}
+  </select>
 
 </mapper>

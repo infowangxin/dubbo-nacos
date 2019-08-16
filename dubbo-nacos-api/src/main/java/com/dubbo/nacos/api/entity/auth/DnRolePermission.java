@@ -1,6 +1,6 @@
 package com.dubbo.nacos.api.entity.auth;
 
-import com.dubbo.nacos.api.entity.BaseEntity;
+import com.dubbo.nacos.api.entity.DnBaseEntity;
 import lombok.Data;
 
 /**
@@ -10,7 +10,7 @@ import lombok.Data;
  * @date 2019-07-31 20:11
  */
 @Data
-public class RolePermission extends BaseEntity {
+public class DnRolePermission extends DnBaseEntity {
 
     private static final long serialVersionUID = -7948507636703811294L;
 
@@ -34,11 +34,11 @@ public class RolePermission extends BaseEntity {
      **/
     private String siteCode;
 
-    public RolePermission() {
+    public DnRolePermission() {
         super();
     }
 
-    public RolePermission(Long id, Long roleId, Long permissionId, String siteCode) {
+    public DnRolePermission(Long id, Long roleId, Long permissionId, String siteCode) {
         this.id = id;
         this.roleId = roleId;
         this.permissionId = permissionId;

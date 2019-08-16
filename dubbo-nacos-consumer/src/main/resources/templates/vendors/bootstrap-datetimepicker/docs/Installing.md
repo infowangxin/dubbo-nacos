@@ -110,7 +110,7 @@ ko.bindingHandlers.dateTimePicker = {
         var options = allBindingsAccessor().dateTimePickerOptions || {};
         $(element).datetimepicker(options);
 
-        //when a user changes the date, update the view model
+        //when a dnUser changes the date, update the view model
         ko.utils.registerEventHandler(element, "dp.change", function (event) {
             var value = valueAccessor();
             if (ko.isObservable(value)) {

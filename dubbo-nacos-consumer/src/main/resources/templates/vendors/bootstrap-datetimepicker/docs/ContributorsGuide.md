@@ -17,9 +17,9 @@ The component uses on `jQuery`, `moment.js` and `bootstrap` libraries.
 
 * `date` - Holds the moment object for the model value of the component. **DON'T** directly change this variable unless you **REALLY** know what you are doing. Use `setValue()` function to set it. It handles all component logic for updating the model value and emitting all the appropriate events
 
-* `viewDate` - Holds the currently selected value that the user has selected through the widget. This is not the model value this is the view value. Changing this usually requires a subsequent call to `update()` function
+* `viewDate` - Holds the currently selected value that the dnUser has selected through the widget. This is not the model value this is the view value. Changing this usually requires a subsequent call to `update()` function
 
-* `unset` - A `boolean` variable that holds wheather the components model value is set or not. Model's value starts as `unset = true` and if is either set by the user or programmatically through the api to a valid value then it is set to `false`. If subsequent events lead to an invalid value then this variable is set to `true` again. Setting this variable usually takes place in the `setValue()` function.
+* `unset` - A `boolean` variable that holds wheather the components model value is set or not. Model's value starts as `unset = true` and if is either set by the dnUser or programmatically through the api to a valid value then it is set to `false`. If subsequent events lead to an invalid value then this variable is set to `true` again. Setting this variable usually takes place in the `setValue()` function.
 
 * `input` - Hold the DOM input element this instance is attached to
 

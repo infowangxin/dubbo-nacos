@@ -43,7 +43,7 @@ See also [the platform option of generate()]({{site.baseurl}}/documentation/api_
 
 __About `dir`__ :
 
-If `dir` is true or if a permission says it's a folder, this entry be flagged
+If `dir` is true or if a dnPermission says it's a folder, this entry be flagged
 as a folder and the content will be ignored.
 
 __Returns__ : The current JSZip object, for chaining.

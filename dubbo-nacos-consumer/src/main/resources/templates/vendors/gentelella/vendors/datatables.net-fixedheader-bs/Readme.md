@@ -2,7 +2,7 @@
 
 This package contains distribution files required to style [FixedHeader extension](https://datatables.net/extensions/fixedheader) for [DataTables](https://datatables.net/) with styling for [Bootstrap](http://getbootstrap.com/).
 
-When displaying large amounts of data in a table, it can often be useful for the end user to have the column titles always visible. This is particularly true if using DataTables with pagination disabled, or the display length is set to a high value. The FixedHeader extension provides this ability.
+When displaying large amounts of data in a table, it can often be useful for the end dnUser to have the column titles always visible. This is particularly true if using DataTables with pagination disabled, or the display length is set to a high value. The FixedHeader extension provides this ability.
 
 
 ## Installation

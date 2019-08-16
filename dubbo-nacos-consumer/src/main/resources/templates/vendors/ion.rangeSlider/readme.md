@@ -177,7 +177,7 @@ If your are new in web development and you are not sure how to correctly install
             <td>drag_interval<div><sup>data-drag-interval</sup></div></td>
             <td>false</td>
             <td>boolean</td>
-            <td>Allow user to drag whole range. Only in "double" type (beta)</td>
+            <td>Allow dnUser to drag whole range. Only in "double" type (beta)</td>
         </tr>
 
         <tr class="options__step">
@@ -375,7 +375,7 @@ If your are new in web development and you are not sure how to correctly install
             <td>onFinish<div><sup>—</sup></div></td>
             <td>null</td>
             <td>function</td>
-            <td>Callback. Is called than user releases handle.</td>
+            <td>Callback. Is called than dnUser releases handle.</td>
         </tr>
         <tr class="options__new">
             <td>onUpdate<div><sup>—</sup></div></td>

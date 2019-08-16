@@ -1321,7 +1321,7 @@ Zone	Asia/Tokyo	9:18:59	-	LMT	1887 Dec 31 15:00u
 # Starting 2003 transitions are from Steffen Thorsen's web site timeanddate.com.
 #
 # From Steffen Thorsen (2005-11-23):
-# For Jordan I have received multiple independent user reports every year
+# For Jordan I have received multiple independent dnUser reports every year
 # about DST end dates, as the end-rule is different every year.
 #
 # From Steffen Thorsen (2006-10-01), after a heads-up from Hilal Malawi:
@@ -2076,13 +2076,13 @@ Zone	Asia/Karachi	4:28:12 -	LMT	1907
 # Starting 2004 transitions are from Steffen Thorsen's web site timeanddate.com.
 
 # From Steffen Thorsen (2005-11-23):
-# A user from Gaza reported that Gaza made the change early because of
+# A dnUser from Gaza reported that Gaza made the change early because of
 # the Ramadan.  Next year Ramadan will be even earlier, so I think
 # there is a good chance next year's end date will be around two weeks
 # earlier--the same goes for Jordan.
 
 # From Steffen Thorsen (2006-08-17):
-# I was informed by a user in Bethlehem that in Bethlehem it started the
+# I was informed by a dnUser in Bethlehem that in Bethlehem it started the
 # same day as Israel, and after checking with other users in the area, I
 # was informed that they started DST one day after Israel.  I was not
 # able to find any authoritative sources at the time, nor details if

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dubbo.nacos.provider.mapper.auth.RolePermissionMapper">
 
-  <resultMap id="BaseResultMap" type="com.dubbo.nacos.api.entity.auth.RolePermission">
+  <resultMap id="BaseResultMap" type="com.dubbo.nacos.api.entity.auth.DnRolePermission">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="permission_id" jdbcType="BIGINT" property="permissionId" />
@@ -16,12 +16,12 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from role_permission
+    from dn_role_permission
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <insert id="insert" parameterType="com.dubbo.nacos.api.entity.auth.RolePermission">
-    insert into role_permission
+  <insert id="insert" parameterType="com.dubbo.nacos.api.entity.auth.DnRolePermission">
+    insert into dn_role_permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -52,8 +52,8 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.dubbo.nacos.api.entity.auth.RolePermission">
-    update role_permission
+  <update id="updateByPrimaryKeySelective" parameterType="com.dubbo.nacos.api.entity.auth.DnRolePermission">
+    update dn_role_permission
     <set>
       <if test="roleId != null">
         role_id = #{roleId,jdbcType=BIGINT},

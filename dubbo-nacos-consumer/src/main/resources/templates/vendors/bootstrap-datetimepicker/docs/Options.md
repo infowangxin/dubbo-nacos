@@ -121,7 +121,7 @@ Returns the currently set moment of the `options.minDate` or `false` if not set
 
 #### minDate(minDate)
 
-Takes a minDate `string, Date, moment, boolean:false` parameter and disallows the user to select a moment that is before that moment. If a `boolean:false` value is passed the `options.minDate` parameter is cleared and there is no restriction to the miminum moment the user can select. 
+Takes a minDate `string, Date, moment, boolean:false` parameter and disallows the dnUser to select a moment that is before that moment. If a `boolean:false` value is passed the `options.minDate` parameter is cleared and there is no restriction to the miminum moment the dnUser can select. 
 
 **Note:** If the minDate parameter is after the currently selected moment the currently selected moment changes to minDate parameter
 
@@ -146,7 +146,7 @@ Returns the currently set moment of the `options.maxDate` or `false` if not set
 
 #### maxDate(maxDate)
 
-Takes a maxDate `string, Date, moment, boolean:false` parameter and disallows the user to select a moment that is after that moment. If a `boolean:false` value is passed `options.maxDate` is cleared and there is no restriction to the maximum moment the user can select.
+Takes a maxDate `string, Date, moment, boolean:false` parameter and disallows the dnUser to select a moment that is after that moment. If a `boolean:false` value is passed `options.maxDate` is cleared and there is no restriction to the maximum moment the dnUser can select.
 
 **Note:** If maxDate is before the currently selected moment the currently selected moment changes to maxDate
 
@@ -176,9 +176,9 @@ Returns a `boolean` or `string` with the `options.useCurrent` option configurati
 
 #### useCurrent(boolean or string)
 
-Takes a `boolean` or `string`. If a `boolean` true is passed and the components model moment is not set (either through `setDate` or through a valid value on the input element the component is attached to) then the first time the user opens the datetimepicker widget the value is initialized to the current moment of the action. If a false `boolean` is passed then no initialization happens on the input element. You can select the granularity on the initialized moment by passing one of the following strings (`'year', 'month', 'day', 'hour', 'minute'`) in the variable.
+Takes a `boolean` or `string`. If a `boolean` true is passed and the components model moment is not set (either through `setDate` or through a valid value on the input element the component is attached to) then the first time the dnUser opens the datetimepicker widget the value is initialized to the current moment of the action. If a false `boolean` is passed then no initialization happens on the input element. You can select the granularity on the initialized moment by passing one of the following strings (`'year', 'month', 'day', 'hour', 'minute'`) in the variable.
 
-If for example you pass `'day'` to the `setUseCurrent` function and the input field is empty the first time the user opens the datetimepicker widget the input text will be initialized to the current datetime with day granularity (ie if currentTime = `2014-08-10 13:32:33` the input value will be initialized to `2014-08-10 00:00:00`)
+If for example you pass `'day'` to the `setUseCurrent` function and the input field is empty the first time the dnUser opens the datetimepicker widget the input text will be initialized to the current datetime with day granularity (ie if currentTime = `2014-08-10 13:32:33` the input value will be initialized to `2014-08-10 00:00:00`)
 
 **Note:** If the `options.defaultDate` is set or the input element the component is attached to has already a value that takes precedence and the functionality of `useCurrent` is not triggered!
 
@@ -259,7 +259,7 @@ Returns an array with the currently set disabled dates on the component.
 
 #### disabledDates(dates)
 
-Takes an `[` `string` or `Date` or `moment` `]` of values and disallows the user to select those days. Setting this takes precedence over `options.minDate`, `options.maxDate` configuration. Also calling this function removes the configuration of options.enabledDates if such exist.
+Takes an `[` `string` or `Date` or `moment` `]` of values and disallows the dnUser to select those days. Setting this takes precedence over `options.minDate`, `options.maxDate` configuration. Also calling this function removes the configuration of options.enabledDates if such exist.
 
 **Note:** These values are matched with `Day` granularity.
 
@@ -272,7 +272,7 @@ Returns an array with the currently set enabled dates on the component.
 
 #### enabledDates(dates)
 
-Takes an `[` `string` or `Date` or `moment` `]` of values and allows the user to select only from those days. Setting this takes precedence over `options.minDate`, `options.maxDate` configuration. Also calling this function removes the configuration of options.disabledDates if such exist.
+Takes an `[` `string` or `Date` or `moment` `]` of values and allows the dnUser to select only from those days. Setting this takes precedence over `options.minDate`, `options.maxDate` configuration. Also calling this function removes the configuration of options.disabledDates if such exist.
 
 **Note:** These values are matched with `Day` granularity.
 
@@ -358,7 +358,7 @@ Returns an array with the `options.daysOfWeekDisabled` configuration setting of 
 
 #### daysOfWeekDisabled(daysOfWeek)
 
-Takes an `[` `Number`:`0` to `6` `]` and disallow the user to select weekdays that exist in this array. This has lower priority over the `options.minDate`, `options.maxDate`, `options.disabledDates` and `options.enabledDates` configuration settings.
+Takes an `[` `Number`:`0` to `6` `]` and disallow the dnUser to select weekdays that exist in this array. This has lower priority over the `options.minDate`, `options.maxDate`, `options.disabledDates` and `options.enabledDates` configuration settings.
 
 ##### Emits
 
@@ -504,7 +504,7 @@ Returns the currently set `options.widgetPositioning` object containing two keys
 
 Takes an object parameter that can contain two keys `vertical` and `horizontal` each having a value of `'auto', 'top', 'bottom'` for `vertical` and `'auto', 'left', 'right'` for `horizontal` which defines where the dropdown with the widget will appear relative to the input element the component is attached to.
 
-`'auto'` is the default value for both `horizontal` and `vertical` keys and it tries to automatically place the dropdown in a position that is visible to the user. Usually you should not override those options unless you have a special need in your layout.
+`'auto'` is the default value for both `horizontal` and `vertical` keys and it tries to automatically place the dropdown in a position that is visible to the dnUser. Usually you should not override those options unless you have a special need in your layout.
 
 ----------------------
 
@@ -804,7 +804,7 @@ Returns a `function` with the currently set `options.parseInputDate`
 
 Takes a `function`
 
-Allows custom input formatting For example: the user can enter 'yesterday' or '30 days ago'.
+Allows custom input formatting For example: the dnUser can enter 'yesterday' or '30 days ago'.
 
 Example:
 

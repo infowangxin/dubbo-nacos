@@ -462,7 +462,7 @@ example:
         </td>
         <td>
             <strong>Object Array</strong>: an array of the object of all the step anchor elements
-            <strong>Object</strong>: Context information with key: <em>fromStep</em> indicating which step the user was on when they clicked the finish button.
+            <strong>Object</strong>: Context information with key: <em>fromStep</em> indicating which step the dnUser was on when they clicked the finish button.
         </td>
     </tr>
 </table>

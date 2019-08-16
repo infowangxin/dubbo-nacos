@@ -1,6 +1,6 @@
 package com.dubbo.nacos.provider.mapper.auth;
 
-import com.dubbo.nacos.api.entity.auth.RolePermission;
+import com.dubbo.nacos.api.entity.auth.DnRolePermission;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -14,22 +14,22 @@ public interface RolePermissionMapper {
     /**
      * insert RolePermission
      *
-     * @param rolePermission
+     * @param dnRolePermission
      */
-    int insert(RolePermission rolePermission);
+    int insert(DnRolePermission dnRolePermission);
 
     /**
      * select RolePermission by id
      *
      * @param id
      */
-    RolePermission selectByPrimaryKey(Long id);
+    DnRolePermission selectByPrimaryKey(Long id);
 
     /**
      * update RolePermission by selective
      *
-     * @param rolePermission
+     * @param dnRolePermission
      */
-    int updateByPrimaryKeySelective(RolePermission rolePermission);
+    int updateByPrimaryKeySelective(DnRolePermission dnRolePermission);
 
 }

@@ -1,8 +1,11 @@
 package com.dubbo.nacos.api.service.auth;
 
-import com.dubbo.nacos.api.entity.auth.Role;
-import com.dubbo.nacos.api.entity.auth.User;
+import com.dubbo.nacos.api.entity.auth.DnPermission;
+import com.dubbo.nacos.api.entity.auth.DnRole;
+import com.dubbo.nacos.api.entity.auth.DnUser;
 import com.dubbo.nacos.api.exception.DnBusinessException;
+
+import java.util.List;
 
 /**
  * dubbo nacos authenticate related interface
@@ -13,34 +16,34 @@ import com.dubbo.nacos.api.exception.DnBusinessException;
 public interface DnAuthSerice {
 
     /**
-     * find Role by roleCode
+     * find DnRole by roleCode
      *
-     * @param roleCode roleCode
-     * @return Role
+     * @param roleCode DnRole.roleCode
+     * @return DnRole
      */
-    public Role findRoleByRoleCode(String roleCode);
+    public DnRole findRoleByRoleCode(String roleCode);
 
     /**
-     * find User by account
+     * find DnUser by account
      *
-     * @param account User.account
-     * @return User
+     * @param account DnUser.account
+     * @return DnUser
      */
-    public User findUserByAccount(String account);
+    public DnUser findUserByAccount(String account);
 
     /**
-     * add User
+     * add DnUser
      *
-     * @param user
+     * @param dnUser
      * @return
      */
-    public boolean addUser(User user);
+    public boolean addUser(DnUser dnUser);
 
     /**
      * authorization
      *
-     * @param userId User.id
-     * @param roleId Role.id
+     * @param userId DnUser.id
+     * @param roleId DnRole.id
      * @return
      */
     public boolean authorizing(Long userId, Long roleId);
@@ -48,10 +51,26 @@ public interface DnAuthSerice {
     /**
      * user login
      *
-     * @param account  User.account
-     * @param password User.password
-     * @return User
+     * @param account  DnUser.account
+     * @param password DnUser.password
+     * @return DnUser
      */
-    public User login(String account, String password) throws DnBusinessException;
+    public DnUser login(String account, String password) throws DnBusinessException;
 
+    /**
+     * find DnPermission by userId
+     *
+     * @param userId   DnUser.id
+     * @param siteCode DnPermission.siteCode
+     * @return List DnPermission
+     */
+    public List<DnPermission> findPermissionByUserId(Long userId, String siteCode);
+
+    /**
+     * find DnRole by userId
+     *
+     * @param userId DnUser.id
+     * @return List DnRole
+     */
+    List<DnRole> findRoleByUserId(Long userId);
 }

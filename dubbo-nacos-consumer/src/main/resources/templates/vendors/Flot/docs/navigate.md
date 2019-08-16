@@ -60,10 +60,10 @@ Once activated, zoom and pan cannot be deactivated. When the plot becomes active
 the current viewport.
 
 **cursor** is a standard CSS mouse cursor string used for visual feedback to the
-user when dragging.
+dnUser when dragging.
 
 **frameRate** specifies the maximum number of times per second the plot will
-update itself while the user is panning around on it (set to null to disable
+update itself while the dnUser is panning around on it (set to null to disable
 intermediate pans, the plot will then not update until the mouse button is
 released).
 

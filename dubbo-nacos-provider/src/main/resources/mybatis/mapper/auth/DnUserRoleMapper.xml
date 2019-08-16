@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dubbo.nacos.provider.mapper.auth.UserRoleMapper">
 
-  <resultMap id="BaseResultMap" type="com.dubbo.nacos.api.entity.auth.UserRole">
+  <resultMap id="BaseResultMap" type="com.dubbo.nacos.api.entity.auth.DnUserRole">
     <id column="id" jdbcType="BIGINT" property="id"/>
     <result column="user_id" jdbcType="BIGINT" property="userId"/>
     <result column="role_id" jdbcType="BIGINT" property="roleId"/>
@@ -15,12 +15,12 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from user_role
+    from dn_user_role
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <insert id="insert" parameterType="com.dubbo.nacos.api.entity.auth.UserRole">
-    insert into user_role
+  <insert id="insert" parameterType="com.dubbo.nacos.api.entity.auth.DnUserRole">
+    insert into dn_user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -45,8 +45,8 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.dubbo.nacos.api.entity.auth.UserRole">
-    update user_role
+  <update id="updateByPrimaryKeySelective" parameterType="com.dubbo.nacos.api.entity.auth.DnUserRole">
+    update dn_user_role
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
@@ -61,7 +61,7 @@
   <select id="selectUserRole" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from user_role
+    from dn_user_role
     where user_id = #{userId,jdbcType=BIGINT} and role_id=#{roleId,jdbcType=BIGINT}
   </select>
 </mapper>

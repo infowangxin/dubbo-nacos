@@ -1,5 +1,5 @@
 ---
-title: "How to write a file / give it to the user"
+title: "How to write a file / give it to the dnUser"
 layout: default
 section: example
 ---
@@ -52,7 +52,7 @@ Opera  | Firefox | Safari | Chrome | Internet Explorer
 #### Downloadify
 
 [Downloadify](https://github.com/dcneiner/downloadify) uses a small Flash SWF
-to download files to a user's computer with a filename that you can choose.
+to download files to a dnUser's computer with a filename that you can choose.
 Doug Neiner has added the `dataType` option to allow you to pass a zip for
 downloading. Follow the [Downloadify demo](http://pixelgraphics.us/downloadify/test.html)
 with the following changes:

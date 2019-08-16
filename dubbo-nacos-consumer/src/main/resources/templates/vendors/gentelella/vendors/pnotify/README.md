@@ -168,9 +168,9 @@ Buttons Module
 --------------
 
 `buttons: {`
-* `closer: true` - Provide a button for the user to manually close the notice.
+* `closer: true` - Provide a button for the dnUser to manually close the notice.
 * `closer_hover: true` - Only show the closer button on hover.
-* `sticker: true` - Provide a button for the user to manually stick the notice.
+* `sticker: true` - Provide a button for the dnUser to manually stick the notice.
 * `sticker_hover: true` - Only show the sticker button on hover.
 * `show_on_nonblock: false` - Show the buttons even when the nonblock module is in use.
 * `labels: {close: "Close", stick: "Stick"}` - Lets you change the displayed text, facilitating internationalization.
@@ -182,7 +182,7 @@ NonBlock Module
 ---------------
 
 `nonblock: {`
-* `nonblock: false` - Create a non-blocking notice. It lets the user click elements underneath it.
+* `nonblock: false` - Create a non-blocking notice. It lets the dnUser click elements underneath it.
 * `nonblock_opacity: .2` - The opacity of the notice (if it's non-blocking) when the mouse is over it.
 
 `}`
@@ -191,7 +191,7 @@ Mobile Module
 -------------
 
 `mobile: {`
-* `swipe_dismiss: true` - Let the user swipe the notice away.
+* `swipe_dismiss: true` - Let the dnUser swipe the notice away.
 * `styling: true` - Styles the notice to look good on mobile.
 
 `}`
@@ -218,7 +218,7 @@ Confirm Module
 * `prompt_default: ""` - The default value of the prompt.
 * `prompt_multi_line: false` - Whether the prompt should accept multiple lines of text.
 * `align: "right"` - Where to align the buttons. (right, center, left, justify)
-* `buttons: [{text: "Ok", addClass: "", promptTrigger: true, click: function(notice, value){ notice.remove(); notice.get().trigger("pnotify.confirm", [notice, value]); }},{text: "Cancel", addClass: "", click: function(notice){ notice.remove(); notice.get().trigger("pnotify.cancel", notice); }}]` - The buttons to display, and their callbacks. If a button has promptTrigger set to true, it will be triggered when the user hits enter in a single line prompt. If you want only one button, use null as the second entry of your array to remove the cancel button.
+* `buttons: [{text: "Ok", addClass: "", promptTrigger: true, click: function(notice, value){ notice.remove(); notice.get().trigger("pnotify.confirm", [notice, value]); }},{text: "Cancel", addClass: "", click: function(notice){ notice.remove(); notice.get().trigger("pnotify.cancel", notice); }}]` - The buttons to display, and their callbacks. If a button has promptTrigger set to true, it will be triggered when the dnUser hits enter in a single line prompt. If you want only one button, use null as the second entry of your array to remove the cancel button.
 
 `}`
 
@@ -273,10 +273,10 @@ When they detect AMD/RequireJS, PNotify core defines the named module "pnotify",
 
 ```js
 requirejs(['pnotify', 'pnotify.nonblock', 'pnotify.desktop'], function(PNotify){
-    PNotify.desktop.permission();
+    PNotify.desktop.dnPermission();
     new PNotify({
         title: 'Desktop Notice',
-        text: 'If you\'ve given me permission, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a regular PNotify notice.',
+        text: 'If you\'ve given me dnPermission, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a regular PNotify notice.',
         desktop: {
             desktop: true
         },

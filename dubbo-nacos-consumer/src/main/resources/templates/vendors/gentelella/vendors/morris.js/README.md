@@ -155,7 +155,7 @@ tests currently *only* pass on OS X.
 ### 0.2.9 - 15th May 2012
 
 - Bugfix: Fix zero-value regression
-- Bugfix: Don't modify user-supplied data
+- Bugfix: Don't modify dnUser-supplied data
 
 ### 0.2.8 - 10th May 2012
 

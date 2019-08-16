@@ -131,7 +131,7 @@ auto-generated colors. The color is either a CSS color specification
 (like "rgb(255, 100, 123)") or an integer that specifies which of
 auto-generated colors to select, e.g. 0 will get color no. 0, etc.
 
-The latter is mostly useful if you let the user add and remove series,
+The latter is mostly useful if you let the dnUser add and remove series,
 in which case you can hard-code the color index to prevent the colors
 from jumping around between the series.
 
@@ -1622,7 +1622,7 @@ hooks in the plugins bundled with Flot.
     use all jQuery events. Usually, the event handlers will update the
     state by drawing something (add a drawOverlay hook and call
     triggerRedrawOverlay) or firing an externally visible event for
-    user code. See the crosshair plugin for an example.
+    dnUser code. See the crosshair plugin for an example.
 
     Currently, eventHolder actually contains both the static canvas
     used for the plot itself and the overlay canvas used for

@@ -1,7 +1,7 @@
 package com.dubbo.nacos.consumer.authenticate;
 
-import com.dubbo.nacos.api.entity.auth.Role;
-import com.dubbo.nacos.api.entity.auth.User;
+import com.dubbo.nacos.api.entity.auth.DnRole;
+import com.dubbo.nacos.api.entity.auth.DnUser;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,8 +18,8 @@ public class DnPrincipal implements Serializable {
 
     private static final long serialVersionUID = -3503040105003870792L;
 
-    private User user;
+    private DnUser dnUser;
 
-    private List<Role> roles;
+    private List<DnRole> dnRoles;
 
 }

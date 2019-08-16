@@ -71,7 +71,7 @@ Adapter.destroy = function () { };
   </h2>
 
   <p>
-    The selection is what is shown to the user as a replacement of the
+    The selection is what is shown to the dnUser as a replacement of the
     standard <code>&lt;select&gt;</code> box. It controls the display of the
     selection option(s), as well anything else that needs to be embedded
     within the container, such as a search box.
@@ -149,7 +149,7 @@ DataAdapter.current = function (callback) {
 //
 // @param params An object containing any number of parameters that the query
 //   could be affected by. Only the core parameters will be documented.
-// @param params.term A user-supplied term. This is typically the value of the
+// @param params.term A dnUser-supplied term. This is typically the value of the
 //   search box, if one exists, but can also be an empty string or null value.
 // @param params.page The specific page that should be loaded. This is typically
 //   provided when working with remote data sets, which rely on pagination to
@@ -189,7 +189,7 @@ DataAdapter.query = function (params, callback) {
   </h2>
 
   <p>
-    The results adapter controls the list of results that the user can select
+    The results adapter controls the list of results that the dnUser can select
     from. While the results adapter does not define any additional methods
     that must be implemented, it makes extensive use of the Select2 event
     system for controlling the display of results and messages.

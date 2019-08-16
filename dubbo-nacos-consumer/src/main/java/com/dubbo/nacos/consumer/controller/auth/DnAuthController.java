@@ -1,6 +1,6 @@
 package com.dubbo.nacos.consumer.controller.auth;
 
-import com.dubbo.nacos.api.entity.auth.User;
+import com.dubbo.nacos.api.entity.auth.DnUser;
 import com.dubbo.nacos.consumer.controller.DnBaseController;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -29,21 +29,21 @@ public class DnAuthController extends DnBaseController {
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     String login(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new DnUser());
         log.info("#去登录");
         return "view/login/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("userForm") User user, RedirectAttributes redirectAttributes) {
+    public String login(@ModelAttribute("userForm") DnUser dnUser, RedirectAttributes redirectAttributes) {
         log.info("# 登录中 ");
-        if (null == user || StringUtils.isBlank(user.getAccount()) || StringUtils.isBlank(user.getPassword())) {
+        if (null == dnUser || StringUtils.isBlank(dnUser.getAccount()) || StringUtils.isBlank(dnUser.getPassword())) {
             log.error("# 账号或密码错误");
             return "login";
         }
 
-        String username = user.getAccount();
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getAccount(), user.getPassword());
+        String username = dnUser.getAccount();
+        UsernamePasswordToken token = new UsernamePasswordToken(dnUser.getAccount(), dnUser.getPassword());
         // 获取当前的Subject
         Subject currentUser = SecurityUtils.getSubject();
         try {

@@ -58,12 +58,12 @@ public class CustomerShiroFilterFactoryBean extends ShiroFilterFactoryBean {
         PathMatchingFilterChainResolver chainResolver = new PathMatchingFilterChainResolver();
         chainResolver.setFilterChainManager(manager);
 
-        return new MSpringShiroFilter((WebSecurityManager) securityManager, chainResolver);
+        return new CustomerShiroFilter((WebSecurityManager) securityManager, chainResolver);
     }
 
-    private final class MSpringShiroFilter extends AbstractShiroFilter {
+    private final class CustomerShiroFilter extends AbstractShiroFilter {
 
-        protected MSpringShiroFilter(WebSecurityManager webSecurityManager, FilterChainResolver resolver) {
+        protected CustomerShiroFilter(WebSecurityManager webSecurityManager, FilterChainResolver resolver) {
             super();
             if (webSecurityManager == null) {
                 throw new IllegalArgumentException("WebSecurityManager property cannot be null.");

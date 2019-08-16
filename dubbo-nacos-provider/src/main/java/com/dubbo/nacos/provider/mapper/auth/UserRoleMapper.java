@@ -1,6 +1,6 @@
 package com.dubbo.nacos.provider.mapper.auth;
 
-import com.dubbo.nacos.api.entity.auth.UserRole;
+import com.dubbo.nacos.api.entity.auth.DnUserRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,23 +16,23 @@ public interface UserRoleMapper {
     /**
      * insert UserRole
      *
-     * @param userRole
+     * @param dnUserRole
      */
-    int insert(UserRole userRole);
+    int insert(DnUserRole dnUserRole);
 
     /**
      * select UserRole by id
      *
      * @param id
      */
-    UserRole selectByPrimaryKey(Long id);
+    DnUserRole selectByPrimaryKey(Long id);
 
     /**
      * update UserRole by selective
      *
-     * @param userRole
+     * @param dnUserRole
      */
-    int updateByPrimaryKeySelective(UserRole userRole);
+    int updateByPrimaryKeySelective(DnUserRole dnUserRole);
 
     /**
      * select UserRole by userId and roleId
@@ -41,5 +41,5 @@ public interface UserRoleMapper {
      * @param roleId Role.id
      * @return UserRole
      */
-    UserRole selectUserRole(@Param("userId") Long userId, @Param("roleId") Long roleId);
+    DnUserRole selectUserRole(@Param("userId") Long userId, @Param("roleId") Long roleId);
 }

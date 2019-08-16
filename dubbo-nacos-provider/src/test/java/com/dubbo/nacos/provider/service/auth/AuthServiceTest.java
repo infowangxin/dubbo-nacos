@@ -1,9 +1,9 @@
 package com.dubbo.nacos.provider.service.auth;
 
 import com.alibaba.fastjson.JSON;
-import com.dubbo.nacos.api.constants.DnConstans;
-import com.dubbo.nacos.api.entity.auth.Role;
-import com.dubbo.nacos.api.entity.auth.User;
+import com.dubbo.nacos.api.constants.DnConstants;
+import com.dubbo.nacos.api.entity.auth.DnRole;
+import com.dubbo.nacos.api.entity.auth.DnUser;
 import com.dubbo.nacos.api.service.auth.DnAuthSerice;
 import com.dubbo.nacos.provider.ProviderApplication;
 import lombok.extern.slf4j.Slf4j;
@@ -30,8 +30,8 @@ public class AuthServiceTest {
     @Test
     public void findRoleByRoleCode() {
         try {
-            Role role = dnAuthSerice.findRoleByRoleCode(DnConstans.ROLE_FOR_ADMIN);
-            log.info("# role={}", JSON.toJSONString(role));
+            DnRole dnRole = dnAuthSerice.findRoleByRoleCode(DnConstants.ROLE_FOR_ADMIN);
+            log.info("# role={}", JSON.toJSONString(dnRole));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,8 +40,8 @@ public class AuthServiceTest {
     @Test
     public void findUserByAccount() {
         try {
-            User user = dnAuthSerice.findUserByAccount("vincent");
-            log.info("# user={}", JSON.toJSONString(user));
+            DnUser dnUser = dnAuthSerice.findUserByAccount("vincent");
+            log.info("# user={}", JSON.toJSONString(dnUser));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,12 +50,12 @@ public class AuthServiceTest {
     @Test
     public void addUser() {
         try {
-            User user = new User();
-            user.setAccount("vincent");
-            user.setRealName("胡桃夹子");
-            user.setPassword("123456");
-            boolean ret = dnAuthSerice.addUser(user);
-            log.info("# user={},ret={}", JSON.toJSONString(user), ret);
+            DnUser dnUser = new DnUser();
+            dnUser.setAccount("vincent");
+            dnUser.setRealName("胡桃夹子");
+            dnUser.setPassword("123456");
+            boolean ret = dnAuthSerice.addUser(dnUser);
+            log.info("# user={},ret={}", JSON.toJSONString(dnUser), ret);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,11 +64,11 @@ public class AuthServiceTest {
     @Test
     public void authorizing() {
         try {
-            String roleCode = DnConstans.ROLE_FOR_ADMIN;
+            String roleCode = DnConstants.ROLE_FOR_ADMIN;
             String account = "vincent";
-            Role role = dnAuthSerice.findRoleByRoleCode(roleCode);
-            User user = dnAuthSerice.findUserByAccount(account);
-            boolean ret = dnAuthSerice.authorizing(user.getId(), role.getId());
+            DnRole dnRole = dnAuthSerice.findRoleByRoleCode(roleCode);
+            DnUser dnUser = dnAuthSerice.findUserByAccount(account);
+            boolean ret = dnAuthSerice.authorizing(dnUser.getId(), dnRole.getId());
             log.info("# ret={}", ret);
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,8 +80,8 @@ public class AuthServiceTest {
         try {
             String account = "vincent";
             String password = "123456";
-            User user = dnAuthSerice.login(account, password);
-            log.info("# user={}", JSON.toJSONString(user));
+            DnUser dnUser = dnAuthSerice.login(account, password);
+            log.info("# user={}", JSON.toJSONString(dnUser));
         } catch (Exception e) {
             e.printStackTrace();
         }

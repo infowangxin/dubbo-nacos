@@ -167,7 +167,7 @@ Callback function which will be called when the mouse cursor leaves the region p
 
 **onRegionClick** *function(event, code, region)*
 
-Callback function which will be called when the user clicks the region path. Country code will be passed to the callback as argument. This callback may be called while the user is moving the map. If you need to distinguish between a "real" click and a click resulting from moving the map, you can inspect **$(event.currentTarget).data('mapObject').isMoving**.
+Callback function which will be called when the dnUser clicks the region path. Country code will be passed to the callback as argument. This callback may be called while the dnUser is moving the map. If you need to distinguish between a "real" click and a click resulting from moving the map, you can inspect **$(event.currentTarget).data('mapObject').isMoving**.
 
 **onRegionSelect** *function(event, code, region)*
 
@@ -307,7 +307,7 @@ jQuery('#vmap').bind('resize.jqvmap',
 );
 ```
 
-Consider that fact that you can use standard features of jQuery events like event.preventDefault() or returning false from the callback to prevent default behavior of JQVMap (showing label or changing country color on hover). In the following example, when user moves mouse cursor over Canada label won't be shown and color of country won't be changed. At the same label for Russia will have custom text.
+Consider that fact that you can use standard features of jQuery events like event.preventDefault() or returning false from the callback to prevent default behavior of JQVMap (showing label or changing country color on hover). In the following example, when dnUser moves mouse cursor over Canada label won't be shown and color of country won't be changed. At the same label for Russia will have custom text.
 
 ```js
 jQuery('#vmap').vectorMap(

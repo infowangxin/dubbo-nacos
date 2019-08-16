@@ -1,7 +1,10 @@
 package com.dubbo.nacos.provider.mapper.auth;
 
-import com.dubbo.nacos.api.entity.auth.Permission;
+import com.dubbo.nacos.api.entity.auth.DnPermission;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * Permission mapper
@@ -15,22 +18,30 @@ public interface PermissionMapper {
     /**
      * insert Permission
      *
-     * @param permission
+     * @param dnPermission
      */
-    int insert(Permission permission);
+    int insert(DnPermission dnPermission);
 
     /**
      * select Permission by id
      *
      * @param id
      */
-    Permission selectByPrimaryKey(Long id);
+    DnPermission selectByPrimaryKey(Long id);
 
     /**
      * update Permission by selective
      *
-     * @param permission
+     * @param dnPermission
      */
-    int updateByPrimaryKeySelective(Permission permission);
+    int updateByPrimaryKeySelective(DnPermission dnPermission);
 
+    /**
+     * find DnPermission by userId
+     *
+     * @param userId   DnUser.id
+     * @param siteCode DnPermission.siteCode
+     * @return List DnPermission
+     */
+    List<DnPermission> findPermissionByUserId(@Param("userId") Long userId, @Param("siteCode") String siteCode);
 }

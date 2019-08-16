@@ -33,7 +33,7 @@ If you need to adapt an existing solution to what getBinaryContent does, here
 are the details. When doing a XHR request (level 1, without setting the
 `responseType`) the browser will try to interpret the response as a string and
 decode it from its charset. To avoid this on Firefox/Chrome/Opera, you need to
-set mime type : `xhr.overrideMimeType("text/plain; charset=x-user-defined");`.
+set mime type : `xhr.overrideMimeType("text/plain; charset=x-dnUser-defined");`.
 On IE <= 9, this is harder. The overrideMimeType trick doesn't work so we need
 to use [vbscript](http://stackoverflow.com/questions/1095102/how-do-i-load-binary-image-data-using-javascript-and-xmlhttprequest)
 and non standard attributes.

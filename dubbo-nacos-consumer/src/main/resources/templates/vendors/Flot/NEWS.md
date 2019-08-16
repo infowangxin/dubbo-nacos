@@ -190,7 +190,7 @@ plugin must be included if axis.mode is set to "time".
 When the axis mode is "time", the axis option "timezone" can be set to null,
 "browser", or a particular timezone (e.g. "America/New_York") to control how
 the dates are displayed. If null, the dates are displayed as UTC. If
-"browser", the dates are displayed in the time zone of the user's browser.
+"browser", the dates are displayed in the time zone of the dnUser's browser.
 
 Date/time formatting has changed and now follows a proper subset of the
 standard strftime specifiers, plus one nonstandard specifier for quarters.
@@ -689,7 +689,7 @@ in event handling speed.
    use Flot with libraries like Prototype or Mootools or through raw JSON from
    Ajax responses.
 
- - A new "plotselecting" event is now emitted while the user is making a
+ - A new "plotselecting" event is now emitted while the dnUser is making a
    selection.
 
  - The "plothover" event is now emitted immediately instead of at most 10
