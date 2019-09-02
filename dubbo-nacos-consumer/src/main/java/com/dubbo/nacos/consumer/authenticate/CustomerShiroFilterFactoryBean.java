@@ -58,12 +58,12 @@ public class CustomerShiroFilterFactoryBean extends ShiroFilterFactoryBean {
         PathMatchingFilterChainResolver chainResolver = new PathMatchingFilterChainResolver();
         chainResolver.setFilterChainManager(manager);
 
-        return new CustomerShiroFilter((WebSecurityManager) securityManager, chainResolver);
+        return new MSpringShiroFilter((WebSecurityManager) securityManager, chainResolver);
     }
 
-    private final class CustomerShiroFilter extends AbstractShiroFilter {
+    private final class MSpringShiroFilter extends AbstractShiroFilter {
 
-        protected CustomerShiroFilter(WebSecurityManager webSecurityManager, FilterChainResolver resolver) {
+        protected MSpringShiroFilter(WebSecurityManager webSecurityManager, FilterChainResolver resolver) {
             super();
             if (webSecurityManager == null) {
                 throw new IllegalArgumentException("WebSecurityManager property cannot be null.");
@@ -77,16 +77,15 @@ public class CustomerShiroFilterFactoryBean extends ShiroFilterFactoryBean {
         @Override
         protected void doFilterInternal(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws ServletException, IOException {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
-            String requestUrl = request.getRequestURI().toLowerCase();
+            String str = request.getRequestURI().toLowerCase();
             // 因为ShiroFilter 拦截所有请求（在上面我们配置了urlPattern 为 * ，当然你也可以在那里精确的添加要处理的路径，这样就不需要这个类了），而在每次请求里面都做了session的读取和更新访问时间等操作，这样在集群部署session共享的情况下，数量级的加大了处理量负载。
             // 所以我们这里将一些能忽略的请求忽略掉。
             // 当然如果你的集群系统使用了动静分离处理，静态资料的请求不会到Filter这个层面，便可以忽略。
             boolean flag = true;
             int idx = 0;
-            String var = ".";
-            if ((idx = requestUrl.indexOf(var)) > 0) {
-                requestUrl = requestUrl.substring(idx);
-                if (ignoreExt.contains(requestUrl.toLowerCase())) {
+            if ((idx = str.indexOf(".")) > 0) {
+                str = str.substring(idx);
+                if (ignoreExt.contains(str.toLowerCase())) {
                     flag = false;
                 }
             }

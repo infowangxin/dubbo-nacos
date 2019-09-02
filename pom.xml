@@ -22,7 +22,7 @@
         <java.version>1.8</java.version>
 
         <springframework.version>5.1.8.RELEASE</springframework.version>
-        <springboot.version>2.1.6.RELEASE</springboot.version>
+        <springboot.version>2.1.7.RELEASE</springboot.version>
     </properties>
 
     <repositories>
@@ -109,7 +109,34 @@
                 <version>1.2.59</version>
             </dependency>
 
+            <!-- thymeleaf -->
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf</artifactId>
+                <version>3.0.11.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf-spring4</artifactId>
+                <version>3.0.11.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf-spring5</artifactId>
+                <version>3.0.11.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>2.1.7.RELEASE</version>
+            </dependency>
+
             <!-- apache shiro -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>1.4.1</version>
+            </dependency>
             <dependency>
 				<groupId>org.apache.shiro</groupId>
 				<artifactId>shiro-spring</artifactId>
@@ -120,6 +147,18 @@
 				<artifactId>shiro-ehcache</artifactId>
 				<version>1.4.1</version>
 			</dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring-boot-web-starter</artifactId>
+                <version>1.4.1</version>
+            </dependency>
+
+            <!-- redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>2.1.7.RELEASE</version>
+            </dependency>
 
             <!-- dubbo -->
             <dependency>
@@ -180,16 +219,16 @@
         </dependencies>
     </dependencyManagement>
 
-         <build>
-           <plugins>
-             <plugin>
-               <artifactId>maven-compiler-plugin</artifactId>
-               <configuration>
-                 <source>1.8</source>
-                 <target>1.8</target>
-               </configuration>
-             </plugin>
-           </plugins>
-        </build>
+     <build>
+       <plugins>
+         <plugin>
+           <artifactId>maven-compiler-plugin</artifactId>
+           <configuration>
+             <source>${java.version}</source>
+             <target>${java.version}</target>
+           </configuration>
+         </plugin>
+       </plugins>
+    </build>
 
 </project>

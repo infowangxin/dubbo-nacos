@@ -12,6 +12,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,17 +26,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @date 2019-08-05 22:36
  */
 @Slf4j
+@Controller
 public class DnAuthController extends DnBaseController {
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     String login(Model model) {
         model.addAttribute("user", new DnUser());
         log.info("#去登录");
-        return "view/login/login";
+        return "production/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("userForm") DnUser dnUser, RedirectAttributes redirectAttributes) {
+    public String login(@ModelAttribute DnUser dnUser, RedirectAttributes redirectAttributes) {
         log.info("# 登录中 ");
         if (null == dnUser || StringUtils.isBlank(dnUser.getAccount()) || StringUtils.isBlank(dnUser.getPassword())) {
             log.error("# 账号或密码错误");
@@ -74,7 +76,7 @@ public class DnAuthController extends DnBaseController {
         // 验证是否登录成功
         if (currentUser.isAuthenticated()) {
             log.info("用户[" + username + "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");
-            return "redirect:/index";
+            return "redirect:/production/index";
         } else {
             token.clear();
             return "redirect:/login";
@@ -85,6 +87,11 @@ public class DnAuthController extends DnBaseController {
     public String logout() {
         SecurityUtils.getSubject().logout();
         return "view/login/login";
+    }
+
+    @RequestMapping("")
+    public String home() {
+        return "redirect:/production/index";
     }
 
 

@@ -3,6 +3,19 @@ spring:
     name: dubbo-nacos-consumer
   main:
     allow-bean-definition-overriding: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
+  resources:
+    static-locations: classpath:/templates
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths:  /**
 
 server:
   port: 8080
@@ -16,5 +29,5 @@ dubbo:
   scan: com.dubbo.nacos.consumer
   registry:
     address: nacos://127.0.0.1:8848
-  provider:
-    filter: catTransation
+#  provider:
+#    filter: catTransation

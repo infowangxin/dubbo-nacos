@@ -1,7 +1,7 @@
 package com.dubbo.nacos.consumer.authenticate;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -19,21 +19,20 @@ import java.util.Map;
  * @author 胡桃夹子
  * @date 2019-08-07 21:44
  */
-@Slf4j
 @Configuration
 public class ShiroConfig {
 
     @Bean
     public EhCacheManager getEhCacheManager() {
-        EhCacheManager manager = new EhCacheManager();
-        manager.setCacheManagerConfigFile("classpath:conf/ehcache-shiro.xml");
-        return manager;
+        EhCacheManager em = new EhCacheManager();
+        em.setCacheManagerConfigFile("classpath:conf/ehcache-shiro.xml");
+        return em;
     }
 
-    @Bean(name = "customerAuthorizingRealm")
-    public CustomerAuthorizingRealm myShiroRealm(EhCacheManager cacheManager) {
-        CustomerAuthorizingRealm realm = new CustomerAuthorizingRealm();
-        realm.setCacheManager(cacheManager);
+    @Bean(name = "myShiroRealm")
+    public AuthorizingRealm myShiroRealm() {
+        AuthorizingRealm realm = new CustomerAuthorizingRealm();
+        realm.setCacheManager(getEhCacheManager());
         return realm;
     }
 
@@ -68,9 +67,9 @@ public class ShiroConfig {
     }
 
     @Bean(name = "securityManager")
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(CustomerAuthorizingRealm shiroRealm) {
-        DefaultWebSecurityManager dwsm = new DefaultWebSecurityManager();
-        dwsm.setRealm(shiroRealm);
+    public DefaultWebSecurityManager getDefaultWebSecurityManager() {
+        DefaultWebSecurityManager dwsm = new DefaultWebSecurityManager(myShiroRealm());
+        // dwsm.setRealm(customerAuthorizingRealm);
         // <!-- 用户授权/认证信息Cache, 采用EhCache 缓存 -->
         dwsm.setCacheManager(getEhCacheManager());
         return dwsm;
@@ -85,21 +84,21 @@ public class ShiroConfig {
 
     /**
      * 加载shiroFilter权限控制规则（从数据库读取然后配置）
-     *
-     * @param bean
      */
-    private void loadShiroFilterChain(ShiroFilterFactoryBean bean) {
+    private void loadShiroFilterChain(ShiroFilterFactoryBean shiroFilterFactoryBean) {
         // authc：该过滤器下的页面必须验证后才能访问，它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter
         // anon：它对应的过滤器里面是空的,什么都没做
 
-        /* 下面这些规则配置最好配置到配置文件中 */
+        /////////////////////// 下面这些规则配置最好配置到配置文件中 ///////////////////////
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        log.info("################## 从数据库读取权限规则，加载到shiroFilter中 ##################");
+        // log.info("##################从数据库读取权限规则，加载到shiroFilter中##################");
 
         // filterChainDefinitionMap.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取
 
-        /* anon 可以理解为不拦截 */
+        // anon 可以理解为不拦截
         filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/build/**", "anon");
+        filterChainDefinitionMap.put("/vendors/**", "anon");
         filterChainDefinitionMap.put("/favicon.ico", "anon");
 
         filterChainDefinitionMap.put("/login", "authc");
@@ -107,7 +106,7 @@ public class ShiroConfig {
 
         filterChainDefinitionMap.put("/logout", "logout");
 
-        bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
     }
 
     /**
@@ -116,19 +115,20 @@ public class ShiroConfig {
      * 然后读取数据库相关配置，配置到 shiroFilterFactoryBean 的访问规则中。实际项目中，请使用自己的Service来处理业务逻辑。
      */
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager manager) {
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean() {
 
-        ShiroFilterFactoryBean bean = new CustomerShiroFilterFactoryBean();
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new CustomerShiroFilterFactoryBean();
         // 必须设置 SecurityManager
-        bean.setSecurityManager(manager);
+        shiroFilterFactoryBean.setSecurityManager(getDefaultWebSecurityManager());
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        bean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的连接
-        // shiroFilterFactoryBean.setSuccessUrl("/user");
-        bean.setUnauthorizedUrl("/403");
+        //shiroFilterFactoryBean.setSuccessUrl("/user");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 
-        loadShiroFilterChain(bean);
-        return bean;
+        loadShiroFilterChain(shiroFilterFactoryBean);
+        return shiroFilterFactoryBean;
     }
+
 
 }

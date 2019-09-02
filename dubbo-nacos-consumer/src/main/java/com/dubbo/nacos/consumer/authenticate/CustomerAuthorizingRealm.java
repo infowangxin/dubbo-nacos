@@ -1,5 +1,6 @@
 package com.dubbo.nacos.consumer.authenticate;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.dubbo.nacos.api.constants.DnConstants;
 import com.dubbo.nacos.api.entity.auth.DnPermission;
 import com.dubbo.nacos.api.entity.auth.DnRole;
@@ -15,14 +16,15 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,8 +38,20 @@ import java.util.Set;
 @Slf4j
 public class CustomerAuthorizingRealm extends AuthorizingRealm {
 
-    @Autowired
+    @Reference
     private DnAuthSerice dnAuthSerice;
+
+
+    /**
+     * 设定Password校验的Hash算法与迭代次数.
+     */
+    @PostConstruct
+    public void initCredentialsMatcher() {
+        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher("SHA-1");
+        matcher.setHashIterations(1024);
+        setCredentialsMatcher(matcher);
+    }
+
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {

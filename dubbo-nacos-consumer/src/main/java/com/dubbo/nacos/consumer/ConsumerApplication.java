@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
 /**
  * consumer application
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @Slf4j
 @EnableDubbo
+@ServletComponentScan
 @SpringBootApplication
 public class ConsumerApplication {
 
