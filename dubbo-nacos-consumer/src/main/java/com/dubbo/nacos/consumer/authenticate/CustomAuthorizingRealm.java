@@ -30,13 +30,13 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * shiro customer authorizing realm
+ * shiro custom authorizing realm
  *
  * @author 胡桃夹子
  * @date 2019-08-07 21:46
  */
 @Slf4j
-public class CustomerAuthorizingRealm extends AuthorizingRealm {
+public class CustomAuthorizingRealm extends AuthorizingRealm {
 
     @Reference
     private DnAuthSerice dnAuthSerice;
@@ -55,6 +55,9 @@ public class CustomerAuthorizingRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        if (log.isDebugEnabled()) {
+            log.debug("# doGetAuthorizationInfo ");
+        }
         DnPrincipal principal = (DnPrincipal) principalCollection.fromRealm(getName()).iterator().next();
         Session session = SecurityUtils.getSubject().getSession();
         // ---
@@ -88,6 +91,7 @@ public class CustomerAuthorizingRealm extends AuthorizingRealm {
         return info;
     }
 
+
     private DnUser getUser(String account) {
         DnUser dnUser = dnAuthSerice.findUserByAccount(account);
         if (null == dnUser) {
@@ -104,7 +108,6 @@ public class CustomerAuthorizingRealm extends AuthorizingRealm {
                 dnAuthSerice.authorizing(dnUser.getId(), dnRole.getId());
             }
         }
-
         return dnUser;
     }
 
@@ -131,21 +134,15 @@ public class CustomerAuthorizingRealm extends AuthorizingRealm {
                 throw new DnBusinessException(10, "非法用户身份");
             }
 
-            DnUser dnUser = getUser(username);
-            if (null == dnUser) {
+            DnUser user = getUser(username);
+            if (null == user) {
                 log.error("## 用户不存在={} .", username);
                 throw new DnBusinessException(10, "账号或密码错误");
             }
 
-            byte[] salt = Encodes.decodeHex(dnUser.getSalt());
+            byte[] salt = Encodes.decodeHex(user.getSalt());
 
-            DnPrincipal principal = new DnPrincipal();
-            principal.setDnUser(dnUser);
-            //principal.setRoles(roleService.findRoleByUserId(user.getId()));
-
-            //SecurityUtils.getSubject().getSession().setAttribute(Constants.PERMISSION_SESSION, permissionService.getPermissions(user.getId()));
-
-            return new SimpleAuthenticationInfo(principal, dnUser.getPassword(), ByteSource.Util.bytes(salt), getName());
+            return new SimpleAuthenticationInfo(username, user.getPassword(), ByteSource.Util.bytes(salt), getName());
         } catch (AuthenticationException e) {
             log.error("# doGetAuthenticationInfo error , message={}", e.getMessage());
             e.printStackTrace();

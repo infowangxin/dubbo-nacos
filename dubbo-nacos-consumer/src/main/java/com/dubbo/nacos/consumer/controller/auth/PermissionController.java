@@ -4,6 +4,7 @@ import com.dubbo.nacos.consumer.controller.DnBaseController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -17,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("production")
 public class PermissionController extends DnBaseController {
 
-    @GetMapping("/index")
-    public String index() {
-        log.info("# index");
-        return "/production/index";
+    @GetMapping(value = {"/{page}", "/{page}.html"})
+    public String page(@PathVariable String page) {
+        log.info("# production/{}", page);
+        return "/production/" + page;
     }
 
 }

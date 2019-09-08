@@ -48,3 +48,13 @@ dubbo:
 
 mybatis-plus:
   mapper-locations: classpath:mybatis/mapper/**/*.xml
+
+logging:
+  pattern:
+    console: "%date{HH:mm:ss.SSS} %5p [%t] %logger{36} %line - %m%n"
+  #    console: "%date{HH:mm:ss.SSS} %5p [%t] %replace(%caller{1}){'\t|Caller.{1}0|\r\n', ''}  - %m%n"
+  level:
+    com.dubbo.nacos.provider: DEBUG
+    org.springframework: DEBUG
+    #    org.springframework.web: DEBUG
+    org.apache.shiro: DEBUG

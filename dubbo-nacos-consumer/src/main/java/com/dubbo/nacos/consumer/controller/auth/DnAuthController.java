@@ -1,6 +1,6 @@
 package com.dubbo.nacos.consumer.controller.auth;
 
-import com.dubbo.nacos.api.entity.auth.DnUser;
+import com.dubbo.nacos.common.entity.Login;
 import com.dubbo.nacos.consumer.controller.DnBaseController;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -14,9 +14,9 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -29,23 +29,23 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class DnAuthController extends DnBaseController {
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
-    String login(Model model) {
-        model.addAttribute("user", new DnUser());
+    @GetMapping("login")
+    public String login(Model model) {
+        // model.addAttribute("user", new DnUser());
         log.info("#去登录");
         return "production/login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute DnUser dnUser, RedirectAttributes redirectAttributes) {
-        log.info("# 登录中 ");
-        if (null == dnUser || StringUtils.isBlank(dnUser.getAccount()) || StringUtils.isBlank(dnUser.getPassword())) {
-            log.error("# 账号或密码错误");
+    @PostMapping("/login")
+    public String login(@ModelAttribute Login login, RedirectAttributes redirectAttributes) {
+        log.info("# login ");
+        if (null == login || StringUtils.isBlank(login.getUsername()) || StringUtils.isBlank(login.getPassword())) {
+            log.error("# username error or password error");
             return "login";
         }
 
-        String username = dnUser.getAccount();
-        UsernamePasswordToken token = new UsernamePasswordToken(dnUser.getAccount(), dnUser.getPassword());
+        String username = login.getUsername();
+        UsernamePasswordToken token = new UsernamePasswordToken(login.getUsername(), login.getPassword());
         // 获取当前的Subject
         Subject currentUser = SecurityUtils.getSubject();
         try {
@@ -83,14 +83,20 @@ public class DnAuthController extends DnBaseController {
         }
     }
 
-    @RequestMapping("/logout")
+    @GetMapping("/logout")
     public String logout() {
-        SecurityUtils.getSubject().logout();
-        return "view/login/login";
+        log.info("# logout");
+        try {
+            SecurityUtils.getSubject().logout();
+        } catch (Exception e) {
+            log.error("# {}", e);
+        }
+        return "redirect:/login";
     }
 
-    @RequestMapping("")
+    @GetMapping("")
     public String home() {
+        log.info("# redirect:/production/index ");
         return "redirect:/production/index";
     }
 

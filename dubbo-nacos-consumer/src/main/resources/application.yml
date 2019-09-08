@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: dubbo-nacos-consumer
@@ -16,9 +19,26 @@ spring:
         content:
           enabled: true
           paths:  /**
+  #  cache:
+  #    redis:
+  #      time-to-live: 60s
+  #    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 10000
+    lettuce:
+      pool:
+        max-idle: 10
+        max-active: 10
+        min-idle: 5
+        max-wait: 10000
+    database: 0
 
-server:
-  port: 8080
+# 自定义shiro相关的参数
+shiro:
+  globalSessionTimeout: 3600000 # session生命周期 单位ms 暂设1小时
 
 dubbo:
   application:
@@ -31,3 +51,13 @@ dubbo:
     address: nacos://127.0.0.1:8848
 #  provider:
 #    filter: catTransation
+
+logging:
+  pattern:
+    console: "%date{HH:mm:ss.SSS} %5p [%t] %logger{36} %line - %m%n"
+#    console: "%date{HH:mm:ss.SSS} %5p [%t] %replace(%caller{1}){'\t|Caller.{1}0|\r\n', ''}  - %m%n"
+  level:
+    com.dubbo.nacos.consumer: DEBUG
+#    org.springframework: DEBUG
+#    org.springframework.web: DEBUG
+#    org.apache.shiro: DEBUG

@@ -1,11 +1,19 @@
 package com.dubbo.nacos.consumer.authenticate;
 
-import org.apache.shiro.cache.ehcache.EhCacheManager;
+import com.dubbo.nacos.api.constants.DnConstants;
+import com.dubbo.nacos.consumer.config.RedisConfig;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
+import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,63 +31,120 @@ import java.util.Map;
 public class ShiroConfig {
 
     @Bean
-    public EhCacheManager getEhCacheManager() {
-        EhCacheManager em = new EhCacheManager();
-        em.setCacheManagerConfigFile("classpath:conf/ehcache-shiro.xml");
-        return em;
+    public RedisConfig redisConfig() {
+        return new RedisConfig();
     }
 
-    @Bean(name = "myShiroRealm")
-    public AuthorizingRealm myShiroRealm() {
-        AuthorizingRealm realm = new CustomerAuthorizingRealm();
-        realm.setCacheManager(getEhCacheManager());
+    public RedisManager redisManager() {
+        RedisConfig config = redisConfig();
+        RedisManager manager = new RedisManager();
+        manager.setHost(config.getHost() + ":" + config.getPort());
+        manager.setTimeout(redisConfig().getTimeout());
+        return manager;
+    }
+
+    public RedisCacheManager cacheManager() {
+        /* crazycake 实现 */
+        RedisCacheManager cacheManager = new RedisCacheManager();
+        cacheManager.setRedisManager(redisManager());
+        return cacheManager;
+    }
+
+    @Bean
+    public JavaUuidSessionIdGenerator sessionIdGenerator() {
+        return new JavaUuidSessionIdGenerator();
+    }
+
+    @Bean
+    public RedisSessionDAO redisSessionDAO() {
+        /* crazycake 实现 */
+        RedisSessionDAO sessionDAO = new RedisSessionDAO();
+        sessionDAO.setRedisManager(redisManager());
+
+        /* Session ID 生成器 */
+        sessionDAO.setSessionIdGenerator(sessionIdGenerator());
+        return sessionDAO;
+    }
+
+    @Bean
+    public SimpleCookie simpleCookie() {
+        /* cookie的name,对应的默认是 JSESSIONID */
+        SimpleCookie cookie = new SimpleCookie(DnConstants.JSESSIONID);
+        /* path为 / 用于多个系统共享JSESSIONID */
+        cookie.setPath("/");
+        cookie.setMaxAge(DnConstants.SHIRO_SESSION_ID_COOKIE_MAXAGE);
+        return cookie;
+    }
+
+    @Bean
+    public DefaultWebSessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        /* 设置session超时 */
+        sessionManager.setGlobalSessionTimeout(DnConstants.SHIRO_SESSION_TIMEOUT);
+        /* 删除无效session */
+        sessionManager.setDeleteInvalidSessions(true);
+        /* 设置JSESSIONID */
+        sessionManager.setSessionIdCookie(simpleCookie());
+        /* 设置sessionDAO */
+        sessionManager.setSessionDAO(redisSessionDAO());
+        return sessionManager;
+    }
+
+    @Bean
+    public AuthorizingRealm customAuthorizingRealm() {
+        AuthorizingRealm realm = new CustomAuthorizingRealm();
         return realm;
     }
 
-    /**
-     * 注册DelegatingFilterProxy（Shiro）
-     * 集成Shiro有2种方法：
-     * 1. 按这个方法自己组装一个FilterRegistrationBean（这种方法更为灵活，可以自己定义UrlPattern，
-     * 在项目使用中你可能会因为一些很但疼的问题最后采用它， 想使用它你可能需要看官网或者已经很了解Shiro的处理原理了）
-     * 2. 直接使用ShiroFilterFactoryBean（这种方法比较简单，其内部对ShiroFilter做了组装工作，无法自己定义UrlPattern，
-     * 默认拦截 /*）
+    /***
+     * 授权所用配置
+     *
+     * @return
      */
-    // @Bean
-    // public FilterRegistrationBean filterRegistrationBean() {
-    // FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
-    // filterRegistration.setFilter(new DelegatingFilterProxy("shiroFilter"));
-    // // 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理
-    // filterRegistration.addInitParameter("targetFilterLifecycle", "true");
-    // filterRegistration.setEnabled(true);
-    // filterRegistration.addUrlPatterns("/*");// 可以自己灵活的定义很多，避免一些根本不需要被Shiro处理的请求被包含进来
-    // return filterRegistration;
-    // }
-    @Bean(name = "lifecycleBeanPostProcessor")
+    @Bean
+    public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
+        return defaultAdvisorAutoProxyCreator;
+    }
+
+    /***
+     * 使授权注解起作用不如不想配置可以在pom文件中加入
+     * <dependency>
+     *<groupId>org.springframework.boot</groupId>
+     *<artifactId>spring-boot-starter-aop</artifactId>
+     *</dependency>
+     * @param securityManager
+     * @return
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
+    }
+
+    /**
+     * Shiro生命周期处理器
+     */
+    @Bean
     public LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
 
     @Bean
-    public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator daap = new DefaultAdvisorAutoProxyCreator();
-        daap.setProxyTargetClass(true);
-        return daap;
-    }
-
-    @Bean(name = "securityManager")
-    public DefaultWebSecurityManager getDefaultWebSecurityManager() {
-        DefaultWebSecurityManager dwsm = new DefaultWebSecurityManager(myShiroRealm());
-        // dwsm.setRealm(customerAuthorizingRealm);
+    public SecurityManager securityManager() {
+        DefaultWebSecurityManager manager = new DefaultWebSecurityManager(customAuthorizingRealm());
+        // 设置realm.
+        manager.setRealm(customAuthorizingRealm());
+        // 自定义缓存实现 使用redis
+        manager.setCacheManager(cacheManager());
+        // 自定义session管理 使用redis
+        manager.setSessionManager(sessionManager());
         // <!-- 用户授权/认证信息Cache, 采用EhCache 缓存 -->
-        dwsm.setCacheManager(getEhCacheManager());
-        return dwsm;
-    }
-
-    @Bean
-    public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(DefaultWebSecurityManager securityManager) {
-        AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();
-        aasa.setSecurityManager(securityManager);
-        return aasa;
+        // manager.setCacheManager(getEhCacheManager());
+        manager.setSessionManager(sessionManager());
+        return manager;
     }
 
     /**
@@ -114,12 +179,13 @@ public class ShiroConfig {
      * 注意这里参数中的 StudentService 和 IScoreDao 只是一个例子，因为我们在这里可以用这样的方式获取到相关访问数据库的对象，
      * 然后读取数据库相关配置，配置到 shiroFilterFactoryBean 的访问规则中。实际项目中，请使用自己的Service来处理业务逻辑。
      */
-    @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean() {
+    @Bean
+    public ShiroFilterFactoryBean shiroFilter() {
 
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new CustomerShiroFilterFactoryBean();
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new CustomShiroFilterFactoryBean();
         // 必须设置 SecurityManager
-        shiroFilterFactoryBean.setSecurityManager(getDefaultWebSecurityManager());
+        shiroFilterFactoryBean.setSecurityManager(securityManager());
+        // shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         shiroFilterFactoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的连接

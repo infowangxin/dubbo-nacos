@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * consumer application
@@ -14,6 +15,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  */
 @Slf4j
 @EnableDubbo
+@EnableCaching
 @ServletComponentScan
 @SpringBootApplication
 public class ConsumerApplication {

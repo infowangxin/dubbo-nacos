@@ -24,4 +24,18 @@ public class DnConstants {
     /* shiro session key */
     public static final String DN_PERMISSION_URL = "dn_permission_url";
     public static final String DN_ROLE_CODE = "dn_role_code";
+
+    /* custom cookie key */
+    public static final String JSESSIONID = "DNSESSIONID";
+    /* 缓存命名空间 */
+    public static final String SYSTEM_CACHE_NAMESPACE = "DN:";
+
+    /* SESSION */
+    public static final String REDIS_SHIRO_SESSION = SYSTEM_CACHE_NAMESPACE + "SHIRO-SESSION:";
+
+    /* maxAge */
+    public static final int SHIRO_SESSION_ID_COOKIE_MAXAGE = 2592000;
+
+    /* session timeout , milliseconds */
+    public static final int SHIRO_SESSION_TIMEOUT = 1800000;
 }

@@ -152,6 +152,11 @@
                 <artifactId>shiro-spring-boot-web-starter</artifactId>
                 <version>1.4.1</version>
             </dependency>
+            <dependency>
+                <groupId>org.crazycake</groupId>
+                <artifactId>shiro-redis</artifactId>
+                <version>3.2.3</version>
+            </dependency>
 
             <!-- redis -->
             <dependency>

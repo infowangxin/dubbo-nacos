@@ -23,12 +23,12 @@ import java.util.Set;
  * @author 胡桃夹子
  * @date 2019-08-08 20:58
  */
-public class CustomerShiroFilterFactoryBean extends ShiroFilterFactoryBean {
+public class CustomShiroFilterFactoryBean extends ShiroFilterFactoryBean {
 
     // ignore request suffix url
     private Set<String> ignoreExt;
 
-    public CustomerShiroFilterFactoryBean() {
+    public CustomShiroFilterFactoryBean() {
         super();
         ignoreExt = new HashSet<>();
         ignoreExt.add(".jpg");
