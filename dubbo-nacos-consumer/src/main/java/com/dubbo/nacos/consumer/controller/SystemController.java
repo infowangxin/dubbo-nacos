@@ -13,9 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SystemController {
 
     @RequestMapping("/403")
-    public String unauthorizedRole() {
-        log.info("------没有权限-------");
-        return "403";
+    public String error403() {
+        log.info(" 403 ");
+        return "production/page_403";
+    }
+
+    @RequestMapping("/404")
+    public String error404() {
+        log.info(" 404 ");
+        return "production/page_404";
+    }
+
+    @RequestMapping("/500")
+    public String error500() {
+        log.info(" 500 ");
+        return "production/page_500";
     }
 
 }
