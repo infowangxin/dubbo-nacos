@@ -1,10 +1,5 @@
 package com.xxl.job.admin.core.conf;
 
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.ReferenceConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
-import com.dubbo.nacos.api.service.auth.DnAuthSerice;
-import com.xxl.job.admin.core.dubbo.HandlerReference;
 import com.xxl.job.admin.core.thread.JobFailMonitorHelper;
 import com.xxl.job.admin.core.thread.JobRegistryMonitorHelper;
 import com.xxl.job.admin.core.thread.JobScheduleHelper;
@@ -25,16 +20,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -129,7 +121,7 @@ public class XxlJobScheduler implements InitializingBean, DisposableBean {
      * xxl-job default getExecutorBiz
      */
     @Deprecated
-    public static ExecutorBiz _getExecutorBiz(String address) throws Exception {
+    public static ExecutorBiz getExecutorBiz(String address) throws Exception {
         // valid
         if (address==null || address.trim().length()==0) {
             return null;
@@ -157,55 +149,6 @@ public class XxlJobScheduler implements InitializingBean, DisposableBean {
                 null).getObject();
 
         executorBizRepository.put(address, executorBiz);
-        return executorBiz;
-    }
-
-    private static RegistryConfig registryConfig;
-
-    @Autowired
-    private RegistryConfig handlerRegistryConfig;
-
-    @PostConstruct
-    public void beforeInit() {
-        registryConfig = handlerRegistryConfig;
-    }
-
-    /**
-     * xxl-job dubbo getExecutorBiz
-     */
-    public static ExecutorBiz getExecutorBiz(String address) throws Exception {
-        logger.info("# address={}", address);
-        // valid
-        if (address==null || address.trim().length()==0) {
-            return null;
-        }
-
-        // load-cache
-        address = address.trim();
-        ExecutorBiz executorBiz = executorBizRepository.get(address);
-        if (executorBiz != null) {
-            return executorBiz;
-        }
-
-        Map<String, String> parameters = registryConfig.getParameters();
-        String applicationName = parameters.get("applicationName");
-
-        ReferenceConfig<DnAuthSerice> reference = new ReferenceConfig<>();
-        reference.setApplication(new ApplicationConfig(applicationName));
-
-        // set-cache
-        String[] addrArray = address.split("#");
-        if (addrArray.length != 3) {
-            throw new RuntimeException("address is not right!");
-        }
-        String group = addrArray[0];
-        String ip = addrArray[1];
-        String port = addrArray[2];
-
-        // executorBiz = new HandlerReference(group, ip, port, registryConfig);
-        executorBiz = new HandlerReference(address, registryConfig);
-        executorBizRepository.put(address, executorBiz);
-
         return executorBiz;
     }
 
