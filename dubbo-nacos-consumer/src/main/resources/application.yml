@@ -24,8 +24,8 @@ spring:
   #      time-to-live: 60s
   #    type: redis
   redis:
-#    host: 10.148.140.102
-    host: 127.0.0.1
+#    host: 127.0.0.1
+    host: 10.148.140.102
     port: 6379
     password:
     timeout: 10000
@@ -49,8 +49,8 @@ dubbo:
     port: -1
   scan: com.dubbo.nacos.consumer
   registry:
-#    address: nacos://10.148.140.102:8848
-    address: nacos://127.0.0.1:8848
+#    address: nacos://127.0.0.1:8848
+    address: nacos://10.148.140.102:8848
 #  provider:
 #    filter: catTransation
 

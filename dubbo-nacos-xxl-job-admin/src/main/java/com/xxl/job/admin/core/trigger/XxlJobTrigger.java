@@ -11,6 +11,7 @@ import com.xxl.job.core.biz.ExecutorBiz;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.biz.model.TriggerParam;
 import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
+import com.xxl.job.core.glue.GlueTypeEnum;
 import com.xxl.rpc.util.IpUtil;
 import com.xxl.rpc.util.ThrowableUtil;
 import org.slf4j.Logger;
@@ -122,6 +123,8 @@ public class XxlJobTrigger {
         triggerParam.setGlueUpdatetime(jobInfo.getGlueUpdatetime().getTime());
         triggerParam.setBroadcastIndex(index);
         triggerParam.setBroadcastTotal(total);
+        triggerParam.setDubboMethod(jobInfo.getDubboMethod());
+        triggerParam.setDubboVersion(jobInfo.getDubboVersion());
 
         // 3、init address
         String address = null;
@@ -192,8 +195,14 @@ public class XxlJobTrigger {
      */
     public static ReturnT<String> runExecutor(TriggerParam triggerParam, String address){
         ReturnT<String> runResult = null;
+        GlueTypeEnum glueTypeEnum = GlueTypeEnum.match(triggerParam.getGlueType());
         try {
-            ExecutorBiz executorBiz = XxlJobScheduler.getExecutorBiz(address);
+            ExecutorBiz executorBiz = null;
+            if (GlueTypeEnum.DUBBO == glueTypeEnum) {
+                executorBiz = XxlJobScheduler.getDubboEecutorBiz(address);
+            } else {
+                executorBiz = XxlJobScheduler.getExecutorBiz(address);
+            }
             runResult = executorBiz.run(triggerParam);
         } catch (Exception e) {
             logger.error(">>>>>>>>>>> xxl-job trigger error, please check if the executor[{}] is running.", address, e);

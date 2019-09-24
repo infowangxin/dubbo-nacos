@@ -17,9 +17,9 @@
         <module>dubbo-nacos-client</module>
         <module>dubbo-nacos-common</module>
         <module>dubbo-nacos-consumer</module>
+        <module>dubbo-nacos-provider</module>
         <module>dubbo-nacos-xxl-job-admin</module>
         <module>dubbo-nacos-xxl-job-core</module>
-        <module>dubbo-nacos-provider</module>
     </modules>
 
     <properties>

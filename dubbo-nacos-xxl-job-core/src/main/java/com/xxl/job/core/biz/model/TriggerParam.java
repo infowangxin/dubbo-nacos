@@ -5,12 +5,14 @@ import java.io.Serializable;
 /**
  * Created by xuxueli on 16/7/22.
  */
-public class TriggerParam implements Serializable{
+public class TriggerParam implements Serializable {
     private static final long serialVersionUID = 42L;
 
     private int jobId;
 
     private String executorHandler;
+    private String dubboMethod;
+    private String dubboVersion;
     private String executorParams;
     private String executorBlockStrategy;
     private int executorTimeout;
@@ -40,6 +42,22 @@ public class TriggerParam implements Serializable{
 
     public void setExecutorHandler(String executorHandler) {
         this.executorHandler = executorHandler;
+    }
+
+    public String getDubboMethod() {
+        return dubboMethod;
+    }
+
+    public void setDubboMethod(String dubboMethod) {
+        this.dubboMethod = dubboMethod;
+    }
+
+    public String getDubboVersion() {
+        return dubboVersion;
+    }
+
+    public void setDubboVersion(String dubboVersion) {
+        this.dubboVersion = dubboVersion;
     }
 
     public String getExecutorParams() {

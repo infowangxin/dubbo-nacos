@@ -1,8 +1,8 @@
 package com.xxl.job.admin.service.impl;
 
+import com.xxl.job.admin.core.cron.CronExpression;
 import com.xxl.job.admin.core.model.XxlJobGroup;
 import com.xxl.job.admin.core.model.XxlJobInfo;
-import com.xxl.job.admin.core.cron.CronExpression;
 import com.xxl.job.admin.core.route.ExecutorRouteStrategyEnum;
 import com.xxl.job.admin.core.thread.JobScheduleHelper;
 import com.xxl.job.admin.core.util.I18nUtil;
@@ -22,7 +22,13 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.text.MessageFormat;
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * core job action for xxl-job
@@ -84,6 +90,18 @@ public class XxlJobServiceImpl implements XxlJobService {
 		if (GlueTypeEnum.BEAN==GlueTypeEnum.match(jobInfo.getGlueType()) && (jobInfo.getExecutorHandler()==null || jobInfo.getExecutorHandler().trim().length()==0) ) {
 			return new ReturnT<String>(ReturnT.FAIL_CODE, (I18nUtil.getString("system_please_input")+"JobHandler") );
 		}
+		// FIXME 待完善与dubbo的集成
+		// if (GlueTypeEnum.DUBBO==GlueTypeEnum.match(jobInfo.getGlueType()) ){
+		// 	if(StringUtils.isBlank(jobInfo.getExecutorHandler())
+		// 			|| StringUtils.isBlank(jobInfo.getDubboMethod())
+		// 			|| StringUtils.isBlank(jobInfo.getDubboVersion())){
+		// 		return new ReturnT<String>(ReturnT.FAIL_CODE, (I18nUtil.getString("system_please_input")+"Dubbo info") );
+		// 	}
+		//
+		// 	if(StringUtils.isBlank(XxlJobAdminConfig.getAdminConfig().getDubbozkAddress())){
+		// 		return new ReturnT<String>(ReturnT.FAIL_CODE,"dubbu job need to config zk address in xxl-job-admin.properties");
+		// 	}
+		// }
 
 		// fix "\r" in shell
 		if (GlueTypeEnum.GLUE_SHELL==GlueTypeEnum.match(jobInfo.getGlueType()) && jobInfo.getGlueSource()!=null) {
@@ -152,6 +170,18 @@ public class XxlJobServiceImpl implements XxlJobService {
 		if (ExecutorBlockStrategyEnum.match(jobInfo.getExecutorBlockStrategy(), null) == null) {
 			return new ReturnT<String>(ReturnT.FAIL_CODE, (I18nUtil.getString("jobinfo_field_executorBlockStrategy")+I18nUtil.getString("system_unvalid")) );
 		}
+		// FIXME 待完善与dubbo的集成
+		// if (GlueTypeEnum.DUBBO==GlueTypeEnum.match(jobInfo.getGlueType()) ){
+		// 	if(StringUtils.isBlank(jobInfo.getExecutorHandler())
+		// 			|| StringUtils.isBlank(jobInfo.getDubboMethod())
+		// 			|| StringUtils.isBlank(jobInfo.getDubboVersion())){
+		// 		return new ReturnT<String>(ReturnT.FAIL_CODE, (I18nUtil.getString("system_please_input")+"Dubbo info") );
+		// 	}
+		//
+		// 	if(StringUtils.isBlank(XxlJobAdminConfig.getAdminConfig().getDubbozkAddress())){
+		// 		return new ReturnT<String>(ReturnT.FAIL_CODE,"dubbu job need to config zk address in xxl-job-admin.properties");
+		// 	}
+		// }
 
 		// ChildJobId valid
 		if (jobInfo.getChildJobId()!=null && jobInfo.getChildJobId().trim().length()>0) {
@@ -218,6 +248,9 @@ public class XxlJobServiceImpl implements XxlJobService {
 		exists_jobInfo.setExecutorFailRetryCount(jobInfo.getExecutorFailRetryCount());
 		exists_jobInfo.setChildJobId(jobInfo.getChildJobId());
 		exists_jobInfo.setTriggerNextTime(nextTriggerTime);
+		exists_jobInfo.setDubboMethod(jobInfo.getDubboMethod());
+		exists_jobInfo.setDubboVersion(jobInfo.getDubboVersion());
+
         xxlJobInfoDao.update(exists_jobInfo);
 
 

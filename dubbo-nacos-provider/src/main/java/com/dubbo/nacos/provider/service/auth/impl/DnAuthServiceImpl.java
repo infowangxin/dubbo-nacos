@@ -8,7 +8,7 @@ import com.dubbo.nacos.api.entity.auth.DnUser;
 import com.dubbo.nacos.api.entity.auth.DnUserRole;
 import com.dubbo.nacos.api.enums.DnTableEnum;
 import com.dubbo.nacos.api.exception.DnBusinessException;
-import com.dubbo.nacos.api.service.auth.DnAuthSerice;
+import com.dubbo.nacos.api.service.auth.DnAuthService;
 import com.dubbo.nacos.common.utils.salt.Digests;
 import com.dubbo.nacos.common.utils.salt.Encodes;
 import com.dubbo.nacos.provider.framework.id.IdGenerator;
@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class DnAuthServiceImpl implements DnAuthSerice {
+public class DnAuthServiceImpl implements DnAuthService {
 
     @Autowired
     private RoleMapper roleMapper;

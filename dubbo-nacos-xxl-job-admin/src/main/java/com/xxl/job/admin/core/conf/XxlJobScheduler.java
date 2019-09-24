@@ -7,6 +7,7 @@ import com.xxl.job.admin.core.thread.JobTriggerPoolHelper;
 import com.xxl.job.admin.core.util.I18nUtil;
 import com.xxl.job.core.biz.AdminBiz;
 import com.xxl.job.core.biz.ExecutorBiz;
+import com.xxl.job.core.biz.impl.ExecutorBizImpl;
 import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
 import com.xxl.rpc.remoting.invoker.XxlRpcInvokerFactory;
 import com.xxl.rpc.remoting.invoker.call.CallType;
@@ -80,15 +81,16 @@ public class XxlJobScheduler implements InitializingBean, DisposableBean {
 
     // ---------------------- I18n ----------------------
 
-    private void initI18n(){
-        for (ExecutorBlockStrategyEnum item:ExecutorBlockStrategyEnum.values()) {
+    private void initI18n() {
+        for (ExecutorBlockStrategyEnum item : ExecutorBlockStrategyEnum.values()) {
             item.setTitle(I18nUtil.getString("jobconf_block_".concat(item.name())));
         }
     }
 
     // ---------------------- admin rpc provider (no server version) ----------------------
     private static ServletServerHandler servletServerHandler;
-    private void initRpcProvider(){
+
+    private void initRpcProvider() {
         // init
         XxlRpcProviderFactory xxlRpcProviderFactory = new XxlRpcProviderFactory();
         xxlRpcProviderFactory.initConfig(
@@ -106,9 +108,11 @@ public class XxlJobScheduler implements InitializingBean, DisposableBean {
         // servlet handler
         servletServerHandler = new ServletServerHandler(xxlRpcProviderFactory);
     }
+
     private void stopRpcProvider() throws Exception {
         XxlRpcInvokerFactory.getInstance().stop();
     }
+
     public static void invokeAdminService(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         servletServerHandler.handle(null, request, response);
     }
@@ -120,10 +124,9 @@ public class XxlJobScheduler implements InitializingBean, DisposableBean {
     /**
      * xxl-job default getExecutorBiz
      */
-    @Deprecated
     public static ExecutorBiz getExecutorBiz(String address) throws Exception {
         // valid
-        if (address==null || address.trim().length()==0) {
+        if (address == null || address.trim().length() == 0) {
             return null;
         }
 
@@ -151,5 +154,32 @@ public class XxlJobScheduler implements InitializingBean, DisposableBean {
         executorBizRepository.put(address, executorBiz);
         return executorBiz;
     }
+
+    /**
+     * 创建dubbo执行器
+     *
+     * @param address
+     * @return
+     * @throws Exception
+     */
+    public static ExecutorBiz getDubboEecutorBiz(String address) throws Exception {
+        // valid
+        if (address == null || address.trim().length() == 0) {
+            return null;
+        }
+
+        // load-cache
+        address = address.trim();
+        // String key = "zk.address." + address;
+        String key = "nacos.address." + address;
+        ExecutorBiz executorBiz = executorBizRepository.get(key);
+        if (executorBiz != null) {
+            return executorBiz;
+        }
+        executorBiz = new ExecutorBizImpl(address);
+        executorBizRepository.put(key, executorBiz);
+        return executorBiz;
+    }
+
 
 }

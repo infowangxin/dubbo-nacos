@@ -26,6 +26,12 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 
+		<!-- dubbo -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+		</dependency>
+
 		<!-- xxl-rpc-core -->
 		<dependency>
 			<groupId>com.xuxueli</groupId>
@@ -36,6 +42,12 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-exec</artifactId>
+		</dependency>
+
+		<!-- json -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
 		</dependency>
 
 		<!-- groovy-all -->

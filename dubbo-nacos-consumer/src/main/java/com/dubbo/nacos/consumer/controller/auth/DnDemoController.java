@@ -2,7 +2,7 @@ package com.dubbo.nacos.consumer.controller.auth;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dubbo.nacos.api.entity.auth.DnUser;
-import com.dubbo.nacos.api.service.auth.DnAuthSerice;
+import com.dubbo.nacos.api.service.auth.DnAuthService;
 import com.dubbo.nacos.consumer.controller.DnBaseController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class DnDemoController extends DnBaseController {
 
     @Reference
-    private DnAuthSerice dnAuthSerice;
+    private DnAuthService dnAuthService;
 
     @GetMapping("/findUserBy/{account}")
     public DnUser findUserByAccount(@PathVariable String account) {
         log.info("# account={}", account);
-        DnUser user = dnAuthSerice.findUserByAccount(account);
+        DnUser user = dnAuthService.findUserByAccount(account);
         return user;
     }
 }

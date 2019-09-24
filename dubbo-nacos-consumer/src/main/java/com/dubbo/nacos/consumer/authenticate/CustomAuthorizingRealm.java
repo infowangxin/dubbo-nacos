@@ -6,7 +6,7 @@ import com.dubbo.nacos.api.entity.auth.DnPermission;
 import com.dubbo.nacos.api.entity.auth.DnRole;
 import com.dubbo.nacos.api.entity.auth.DnUser;
 import com.dubbo.nacos.api.exception.DnBusinessException;
-import com.dubbo.nacos.api.service.auth.DnAuthSerice;
+import com.dubbo.nacos.api.service.auth.DnAuthService;
 import com.dubbo.nacos.common.utils.salt.Encodes;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -39,7 +39,7 @@ import java.util.Set;
 public class CustomAuthorizingRealm extends AuthorizingRealm {
 
     @Reference
-    private DnAuthSerice dnAuthSerice;
+    private DnAuthService dnAuthService;
 
 
     /**
@@ -64,7 +64,7 @@ public class CustomAuthorizingRealm extends AuthorizingRealm {
         Set<String> permissions = new HashSet<>();
         Object permissionObject = session.getAttribute(DnConstants.DN_PERMISSION_URL);
         if (null == permissionObject) {
-            List<DnPermission> list = dnAuthSerice.findPermissionByUserId(principal.getDnUser().getId(), DnConstants.DUBBO_NACOS_CONSUMER);
+            List<DnPermission> list = dnAuthService.findPermissionByUserId(principal.getDnUser().getId(), DnConstants.DUBBO_NACOS_CONSUMER);
             for (DnPermission permission : list) {
                 permissions.add(permission.getUrl());
             }
@@ -76,7 +76,7 @@ public class CustomAuthorizingRealm extends AuthorizingRealm {
         Set<String> roleCodes = new HashSet<>();
         Object roleCodeObject = session.getAttribute(DnConstants.DN_ROLE_CODE);
         if (null == roleCodeObject) {
-            List<DnRole> list = dnAuthSerice.findRoleByUserId(principal.getDnUser().getId());
+            List<DnRole> list = dnAuthService.findRoleByUserId(principal.getDnUser().getId());
             for (DnRole role : list) {
                 roleCodes.add(role.getRoleCode());
             }
@@ -93,19 +93,19 @@ public class CustomAuthorizingRealm extends AuthorizingRealm {
 
 
     private DnUser getUser(String account) {
-        DnUser dnUser = dnAuthSerice.findUserByAccount(account);
+        DnUser dnUser = dnAuthService.findUserByAccount(account);
         if (null == dnUser) {
             // 演示环境，即自动创建用户信息，自动授权
             dnUser = new DnUser();
             dnUser.setAccount(account);
             dnUser.setRealName("胡桃夹子");
             dnUser.setPassword("123456");
-            boolean ret = dnAuthSerice.addUser(dnUser);
+            boolean ret = dnAuthService.addUser(dnUser);
             if (ret) {
                 String roleCode = DnConstants.ROLE_FOR_ADMIN;
-                DnRole dnRole = dnAuthSerice.findRoleByRoleCode(roleCode);
-                dnUser = dnAuthSerice.findUserByAccount(account);
-                dnAuthSerice.authorizing(dnUser.getId(), dnRole.getId());
+                DnRole dnRole = dnAuthService.findRoleByRoleCode(roleCode);
+                dnUser = dnAuthService.findUserByAccount(account);
+                dnAuthService.authorizing(dnUser.getId(), dnRole.getId());
             }
         }
         return dnUser;
