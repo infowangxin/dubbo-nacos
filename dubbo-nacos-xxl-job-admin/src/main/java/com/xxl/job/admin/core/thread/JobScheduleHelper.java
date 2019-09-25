@@ -34,7 +34,7 @@ public class JobScheduleHelper {
     private volatile static Map<Integer, List<Integer>> ringData = new ConcurrentHashMap<>();
 
     public void start(){
-
+        logger.info(" ======> JobScheduleHelper start ");
         // schedule thread
         scheduleThread = new Thread(new Runnable() {
             @Override

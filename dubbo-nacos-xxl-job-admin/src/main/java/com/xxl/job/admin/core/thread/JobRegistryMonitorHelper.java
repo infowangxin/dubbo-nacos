@@ -29,6 +29,7 @@ public class JobRegistryMonitorHelper {
 	private Thread registryThread;
 	private volatile boolean toStop = false;
 	public void start(){
+		logger.info(" ======> JobRegistryMonitorHelper start ");
 		registryThread = new Thread(new Runnable() {
 			@Override
 			public void run() {

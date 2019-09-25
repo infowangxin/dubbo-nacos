@@ -42,6 +42,7 @@ public class XxlJobScheduler implements InitializingBean, DisposableBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        logger.info(">>>>>>>>> init xxl-job admin");
         // init i18n
         initI18n();
 
@@ -62,7 +63,7 @@ public class XxlJobScheduler implements InitializingBean, DisposableBean {
 
     @Override
     public void destroy() throws Exception {
-
+        logger.info(">>>>>>>>> destroy xxl-job admin");
         // stop-schedule
         JobScheduleHelper.getInstance().toStop();
 

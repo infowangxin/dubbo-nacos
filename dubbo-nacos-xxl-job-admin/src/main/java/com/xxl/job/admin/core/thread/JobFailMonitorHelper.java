@@ -37,6 +37,7 @@ public class JobFailMonitorHelper {
 	private Thread monitorThread;
 	private volatile boolean toStop = false;
 	public void start(){
+		logger.info(" ======> JobFailMonitorHelper start ");
 		monitorThread = new Thread(new Runnable() {
 
 			@Override
