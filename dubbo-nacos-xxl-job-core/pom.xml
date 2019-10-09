@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.dubbo.nacos</groupId>
@@ -13,70 +13,70 @@
 
 	<dependencies>
 		<dependency>
-            <groupId>com.dubbo.nacos</groupId>
-            <artifactId>dubbo-nacos-api</artifactId>
-        </dependency>
+			<groupId>com.dubbo.nacos</groupId>
+			<artifactId>dubbo-nacos-api</artifactId>
+		</dependency>
         <dependency>
             <groupId>com.dubbo.nacos</groupId>
             <artifactId>dubbo-nacos-common</artifactId>
         </dependency>
 
-		<!-- lombok -->
-		<dependency>
+        <!-- lombok -->
+        <dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- slf4j -->
-		<dependency>
+        <!-- slf4j -->
+        <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 
-		<!-- dubbo -->
-		<dependency>
+        <!-- dubbo -->
+        <dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>dubbo</artifactId>
 		</dependency>
 
-		<!-- xxl-rpc-core -->
-		<dependency>
+        <!-- xxl-rpc-core -->
+        <dependency>
 			<groupId>com.xuxueli</groupId>
 			<artifactId>xxl-rpc-core</artifactId>
 		</dependency>
 
-		<!-- commons-exec -->
-		<dependency>
+        <!-- commons-exec -->
+        <dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-exec</artifactId>
 		</dependency>
 
-		<!-- json -->
-		<dependency>
+        <!-- json -->
+        <dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 		</dependency>
 
-		<!-- groovy-all -->
-		<dependency>
+        <!-- groovy-all -->
+        <dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy</artifactId>
 		</dependency>
 
-		<!-- spring-context -->
-		<dependency>
+        <!-- spring-context -->
+        <dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- junit -->
-		<dependency>
+        <!-- junit -->
+        <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-		</dependency><dependency><groupId>com.dubbo.nacos</groupId><artifactId>dubbo-nacos-api</artifactId><version>1.0</version><scope>compile</scope></dependency>
+		</dependency>
 
 	</dependencies>
 
