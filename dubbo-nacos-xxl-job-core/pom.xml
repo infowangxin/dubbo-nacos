@@ -12,6 +12,14 @@
 	<packaging>jar</packaging>
 
 	<dependencies>
+		<dependency>
+            <groupId>com.dubbo.nacos</groupId>
+            <artifactId>dubbo-nacos-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dubbo.nacos</groupId>
+            <artifactId>dubbo-nacos-common</artifactId>
+        </dependency>
 
 		<!-- lombok -->
 		<dependency>
@@ -68,7 +76,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency><dependency><groupId>com.dubbo.nacos</groupId><artifactId>dubbo-nacos-api</artifactId><version>1.0</version><scope>compile</scope></dependency>
 
 	</dependencies>
 

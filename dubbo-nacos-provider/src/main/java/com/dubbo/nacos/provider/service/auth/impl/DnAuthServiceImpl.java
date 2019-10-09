@@ -29,7 +29,7 @@ import java.util.List;
  * @date 2019-08-01 00:14
  */
 @Slf4j
-@Service
+@Service(interfaceClass = DnAuthService.class, version = "1.0")
 public class DnAuthServiceImpl implements DnAuthService {
 
     @Autowired

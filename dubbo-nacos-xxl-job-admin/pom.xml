@@ -14,14 +14,6 @@
     <dependencies>
         <dependency>
             <groupId>com.dubbo.nacos</groupId>
-            <artifactId>dubbo-nacos-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.dubbo.nacos</groupId>
-            <artifactId>dubbo-nacos-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.dubbo.nacos</groupId>
             <artifactId>dubbo-nacos-xxl-job-core</artifactId>
         </dependency>
 

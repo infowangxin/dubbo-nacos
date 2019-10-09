@@ -38,7 +38,7 @@ dubbo:
   server: true
   protocol:
     name: dubbo
-    port: -1
+    port: 20880
   scan: com.dubbo.nacos.provider
   registry:
     address: nacos://127.0.0.1:8848
@@ -55,6 +55,7 @@ logging:
   #    console: "%date{HH:mm:ss.SSS} %5p [%t] %replace(%caller{1}){'\t|Caller.{1}0|\r\n', ''}  - %m%n"
   level:
     com.dubbo.nacos.provider: DEBUG
-    org.springframework: DEBUG
+#    org.springfrorg.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListeneramework: error
+#    org.springframework: DEBUG
     #    org.springframework.web: DEBUG
-    org.apache.shiro: DEBUG
+#    org.apache.shiro: DEBUG

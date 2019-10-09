@@ -1,5 +1,6 @@
 package com.xxl.job.core.biz.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.xxl.job.core.biz.ExecutorBiz;
 import com.xxl.job.core.biz.model.LogResult;
 import com.xxl.job.core.biz.model.ReturnT;
@@ -26,11 +27,11 @@ public class ExecutorBizImpl implements ExecutorBiz {
     private static Logger logger = LoggerFactory.getLogger(ExecutorBizImpl.class);
 
     /* dubbo nacos address , example=nacos://127.0.0.1:8848 */
-    private String address = "nacos://10.148.140.102:8848";
+    private String address;
 
     public ExecutorBizImpl() {
-        // this.address = "";
-        this.address = "nacos://10.148.140.102:8848";
+        this.address = "";
+        // this.address = "nacos://10.148.140.102:8848";
     }
 
     public ExecutorBizImpl(String address) {
@@ -81,6 +82,9 @@ public class ExecutorBizImpl implements ExecutorBiz {
 
     @Override
     public ReturnT<String> run(TriggerParam triggerParam) {
+        if(logger.isDebugEnabled()){
+            logger.debug("# triggerParam={}", JSON.toJSONString(triggerParam));
+        }
         // load old：jobHandler + jobThread
         JobThread jobThread = XxlJobExecutor.loadJobThread(triggerParam.getJobId());
         IJobHandler jobHandler = jobThread != null ? jobThread.getHandler() : null;
@@ -90,6 +94,9 @@ public class ExecutorBizImpl implements ExecutorBiz {
         GlueTypeEnum glueTypeEnum = GlueTypeEnum.match(triggerParam.getGlueType());
         if (GlueTypeEnum.DUBBO == glueTypeEnum) {
             jobHandler = XxlJobExecutor.loadDubboJobHandler(address, triggerParam);
+            if (logger.isDebugEnabled()) {
+                logger.debug("# xxxxxxxxxxxxxxxxxxx {}", jobHandler.hashCode());
+            }
         } else if (GlueTypeEnum.BEAN == glueTypeEnum) {
 
             // new jobhandler

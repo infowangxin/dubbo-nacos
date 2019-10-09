@@ -59,6 +59,11 @@ public class XxlJobScheduler implements InitializingBean, DisposableBean {
         JobScheduleHelper.getInstance().start();
 
         logger.info(">>>>>>>>> init xxl-job admin success.");
+        // try {
+        //     TimeUnit.SECONDS.sleep(10);  // wait
+        // } catch (InterruptedException e) {
+        //     logger.error(e.getMessage(), e);
+        // }
     }
 
     @Override
@@ -178,6 +183,9 @@ public class XxlJobScheduler implements InitializingBean, DisposableBean {
             return executorBiz;
         }
         executorBiz = new ExecutorBizImpl(address);
+        if (logger.isDebugEnabled()) {
+            logger.debug("# key={},  address={}", key, address);
+        }
         executorBizRepository.put(key, executorBiz);
         return executorBiz;
     }

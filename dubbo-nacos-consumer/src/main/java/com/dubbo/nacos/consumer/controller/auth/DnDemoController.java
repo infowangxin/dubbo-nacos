@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/dn/demo")
 public class DnDemoController extends DnBaseController {
 
-    @Reference
+    @Reference(interfaceClass = DnAuthService.class, version = "1.0")
     private DnAuthService dnAuthService;
 
     @GetMapping("/findUserBy/{account}")

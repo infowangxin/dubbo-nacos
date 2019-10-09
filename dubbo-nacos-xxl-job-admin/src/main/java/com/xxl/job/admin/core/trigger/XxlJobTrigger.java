@@ -1,5 +1,6 @@
 package com.xxl.job.admin.core.trigger;
 
+import com.alibaba.fastjson.JSON;
 import com.xxl.job.admin.core.conf.XxlJobAdminConfig;
 import com.xxl.job.admin.core.conf.XxlJobScheduler;
 import com.xxl.job.admin.core.model.XxlJobGroup;
@@ -42,6 +43,9 @@ public class XxlJobTrigger {
     public static void trigger(int jobId, TriggerTypeEnum triggerType, int failRetryCount, String executorShardingParam, String executorParam) {
         // load data
         XxlJobInfo jobInfo = XxlJobAdminConfig.getAdminConfig().getXxlJobInfoDao().loadById(jobId);
+        if(logger.isDebugEnabled()){
+            logger.debug("# jobInfo={}", JSON.toJSONString(jobInfo));
+        }
         if (jobInfo == null) {
             logger.warn(">>>>>>>>>>>> trigger fail, jobId invalid，jobId={}", jobId);
             return;
@@ -125,6 +129,10 @@ public class XxlJobTrigger {
         triggerParam.setBroadcastTotal(total);
         triggerParam.setDubboMethod(jobInfo.getDubboMethod());
         triggerParam.setDubboVersion(jobInfo.getDubboVersion());
+
+        if(logger.isDebugEnabled()){
+            logger.debug("# triggerParam={}", JSON.toJSONString(triggerParam));
+        }
 
         // 3、init address
         String address = null;

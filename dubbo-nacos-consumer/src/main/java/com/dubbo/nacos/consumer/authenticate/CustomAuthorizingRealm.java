@@ -38,7 +38,7 @@ import java.util.Set;
 @Slf4j
 public class CustomAuthorizingRealm extends AuthorizingRealm {
 
-    @Reference
+    @Reference(interfaceClass = DnAuthService.class, version = "1.0")
     private DnAuthService dnAuthService;
 
 

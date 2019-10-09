@@ -14,13 +14,13 @@ import java.util.Calendar;
  * @date 2019-09-23 11:16
  */
 @Slf4j
-@Service
+@Service(interfaceClass = DnJobService.class, version = "1.0")
 public class DnJobServiceImpl implements DnJobService {
 
     @Override
     public String executeTask() {
         log.info("# current time={}", FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss:SSS").format(Calendar.getInstance()));
-        return null;
+        return "success";
     }
 
 }
