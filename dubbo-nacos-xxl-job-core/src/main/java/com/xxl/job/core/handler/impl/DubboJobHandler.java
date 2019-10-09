@@ -73,7 +73,9 @@ public class DubboJobHandler extends IJobHandler {
     }
 
     public DubboJobHandler(String address, TriggerParam triggerParam) {
-        log.info("# address={}, triggerParam={}", address, JSON.toJSONString(triggerParam));
+        if (log.isDebugEnabled()) {
+            log.debug("# address={}, triggerParam={}", address, JSON.toJSONString(triggerParam));
+        }
 
         ApplicationConfig application = new ApplicationConfig();
         application.setName("dubbo-nacos-xxl-job-admin");
@@ -104,7 +106,7 @@ public class DubboJobHandler extends IJobHandler {
 
     @Override
     public ReturnT<String> execute(String param) throws Exception {
-        log.info("# param={}, serviceMethod={}, types={}, values={}", JSON.toJSONString(param), serviceMethod, types, values);
+        log.info("# param={}, serviceMethod={}, types={}, values={}", param, serviceMethod, types, values);
         if (!StringUtils.isEmpty(param)) {
             buildParameter(param);
         }
@@ -118,14 +120,12 @@ public class DubboJobHandler extends IJobHandler {
 
         try {
             Object obj = genericService.$invoke(this.serviceMethod, types, values);
-            if (log.isDebugEnabled()) {
-                log.debug("# result={}", obj);
-            }
+            log.info("# reference.getInterface()={}, method={}, execute result={}", reference.getInterface(), this.serviceMethod, obj);
             ReturnT<String> result = new ReturnT<>(200, "success");
             result.setContent(obj == null ? "" : JSONObject.toJSONString(obj));
             return result;
         } catch (Exception e) {
-            log.error("# ", e);
+            log.error("# reference.getInterface()={}, method={}", reference.getInterface(), this.serviceMethod, e);
             ReturnT<String> result = new ReturnT<>(500, "fail");
             result.setContent(JSONObject.toJSONString(e));
             return result;

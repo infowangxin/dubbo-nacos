@@ -149,7 +149,7 @@ public class JobThread extends Thread{
 						}
 					} else {
 						// just execute
-						logger.debug("# xxxxxxxxxxxxxxxxxxx {}", handler.hashCode());
+						logger.debug("# handler.hashCode()={}", handler.hashCode());
 						executeResult = handler.execute(triggerParam.getExecutorParams());
 					}
 

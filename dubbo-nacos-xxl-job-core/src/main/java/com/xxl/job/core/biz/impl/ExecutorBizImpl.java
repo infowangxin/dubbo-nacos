@@ -95,7 +95,7 @@ public class ExecutorBizImpl implements ExecutorBiz {
         if (GlueTypeEnum.DUBBO == glueTypeEnum) {
             jobHandler = XxlJobExecutor.loadDubboJobHandler(address, triggerParam);
             if (logger.isDebugEnabled()) {
-                logger.debug("# xxxxxxxxxxxxxxxxxxx {}", jobHandler.hashCode());
+                logger.debug("# jobHandler.hashCode()={}", jobHandler.hashCode());
             }
         } else if (GlueTypeEnum.BEAN == glueTypeEnum) {
 
