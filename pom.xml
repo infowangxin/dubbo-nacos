@@ -14,12 +14,13 @@
 
     <modules>
         <module>dubbo-nacos-api</module>
-        <module>dubbo-nacos-client</module>
         <module>dubbo-nacos-common</module>
         <module>dubbo-nacos-consumer</module>
+        <module>dubbo-nacos-job-admin</module>
+        <module>dubbo-nacos-job-common</module>
         <module>dubbo-nacos-provider</module>
-        <module>dubbo-nacos-xxl-job-admin</module>
-        <module>dubbo-nacos-xxl-job-core</module>
+        <!--<module>dubbo-nacos-xxl-job-admin</module>-->
+        <!--<module>dubbo-nacos-xxl-job-core</module>-->
     </modules>
 
     <properties>
@@ -58,6 +59,11 @@
             <dependency>
                 <groupId>com.dubbo.nacos</groupId>
                 <artifactId>dubbo-nacos-xxl-job-core</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dubbo.nacos</groupId>
+                <artifactId>dubbo-nacos-job-common</artifactId>
                 <version>1.0</version>
             </dependency>
 
