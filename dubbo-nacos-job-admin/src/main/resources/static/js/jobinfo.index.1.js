@@ -425,13 +425,20 @@ $(function() {
     $(".glueType").change(function(){
 		// executorHandler
         var $executorHandler = $(this).parents("form").find("input[name='executorHandler']");
+		var $dubboDiv = $(this).parents("form").find("div[name='dubboDiv']");
         var glueType = $(this).val();
-        if ('BEAN' != glueType) {
-            $executorHandler.val("");
-            $executorHandler.attr("readonly","readonly");
-        } else {
-            $executorHandler.removeAttr("readonly");
-        }
+		if ('BEAN' != glueType && 'DUBBO' != glueType) {
+			$executorHandler.val("");
+			$executorHandler.attr("readonly","readonly");
+			$dubboDiv.hide();
+		} else {
+			$executorHandler.removeAttr("readonly");
+			if('BEAN' == glueType){
+				$dubboDiv.hide();
+			}else{
+				$dubboDiv.show();
+			}
+		}
     });
 
 	$("#addModal .glueType").change(function(){
@@ -471,6 +478,8 @@ $(function() {
         $("#updateModal .form input[name='executorFailRetryCount']").val( row.executorFailRetryCount );
 		$('#updateModal .form select[name=executorRouteStrategy] option[value='+ row.executorRouteStrategy +']').prop('selected', true);
 		$("#updateModal .form input[name='executorHandler']").val( row.executorHandler );
+		$("#updateModal .form input[name='executorDubboMethod']").val( row.executorDubboMethod );
+		$("#updateModal .form input[name='executorDubboVersion']").val(row.executorDubboVersion);
 		$("#updateModal .form textarea[name='executorParam']").val( row.executorParam );
         $("#updateModal .form input[name='childJobId']").val( row.childJobId );
 		$('#updateModal .form select[name=executorBlockStrategy] option[value='+ row.executorBlockStrategy +']').prop('selected', true);
