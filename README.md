@@ -8,7 +8,7 @@
 <pre>
     dubbo-nacos-provider是服务端
     dubbo-nacos-consumer是消费端
-    dubbo-nacos-xxl-job-admin是定时任务，基于xxl-job改造后，支持dubbo
+    dubbo-nacos-job-admin是定时任务，基于xxl-job改造后，支持dubbo
 </pre>
 
 [GitHub](https://github.com/wangxinforme) [issues](https://github.com/wangxinforme/dubbo-nacos/issues)
